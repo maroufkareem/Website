@@ -1,7 +1,7 @@
-import { cp, mkdir } from "node:fs/promises";
+import { cp } from "node:fs/promises";
+import { writeStaticSite } from "./render-static-site.mjs";
 
-await mkdir("vercel-output", { recursive: true });
-await cp("index.html", "vercel-output/index.html");
+await writeStaticSite("vercel-output");
 await cp("public/marouf-assets", "vercel-output/marouf-assets", {
   recursive: true,
 });

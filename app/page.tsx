@@ -1,12 +1,12 @@
 const navItems = [
-  "Home",
-  "About",
-  "Courses",
-  "Books",
-  "Achievements",
-  "Testimonials",
-  "Contact",
-  "Quizzes",
+  ["Home", "/"],
+  ["About", "/about/"],
+  ["Courses", "/courses/"],
+  ["Books", "/books/"],
+  ["Achievements", "/achievements/"],
+  ["Testimonials", "/testimonials/"],
+  ["Contact", "/contact/"],
+  ["Quizzes", "/quizzes/"],
 ];
 
 const stats = [
@@ -74,13 +74,13 @@ export default function Home() {
           </span>
         </a>
         <nav aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <a href={`#${item.toLowerCase()}`} key={item}>
+          {navItems.map(([item, href]) => (
+            <a href={href} key={item}>
               {item}
             </a>
           ))}
         </nav>
-        <a className="header-cta" href="#contact">REGISTER NOW</a>
+        <a className="header-cta" href="/contact/">REGISTER NOW</a>
       </header>
 
       <section className="hero" id="home">
@@ -266,7 +266,7 @@ export default function Home() {
         </div>
         <div>
           <h4>QUICK LINKS</h4>
-          {navItems.slice(0, 7).map((item) => <a href={`#${item.toLowerCase()}`} key={item}>{item}</a>)}
+          {navItems.slice(0, 7).map(([item, href]) => <a href={href} key={item}>{item}</a>)}
         </div>
         <div>
           <h4>PROGRAMS</h4>

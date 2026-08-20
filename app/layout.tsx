@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Home Page - The Marouf Method",
+  title: "The Marouf Method | Cambridge Biology & Psychology",
   description:
-    "Cambridge Biology and Psychology education by Dr. Kareem Wael Maarouf.",
+    "Premium Cambridge Biology and Psychology education by Dr. Kareem Wael Maarouf.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

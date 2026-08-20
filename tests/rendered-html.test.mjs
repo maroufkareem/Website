@@ -29,7 +29,7 @@ test("server-renders the fast native Marouf Method page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Home Page - The Marouf Method<\/title>/i);
+  assert.match(html, /<title>The Marouf Method \| Cambridge Biology (?:&amp;|&) Psychology<\/title>/i);
   assert.match(html, /DR\. KAREEM WAEL MAAROUF/);
   assert.match(html, /Where\s*Knowledge\s*Becomes\s*Mastery/);
   assert.match(html, /Cambridge Biology O Level/);
@@ -49,23 +49,27 @@ test("source is free of temporary starter preview code", async () => {
 
   assert.match(page, /The Marouf Method/);
   assert.match(styles, /\/marouf-assets\/hero\.jpg/);
-  assert.match(layout, /Home Page - The Marouf Method/);
+  assert.match(layout, /The Marouf Method \| Cambridge Biology & Psychology/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page + layout, /SkeletonPreview|codex-preview|Your site is taking shape/);
 });
 
-test("static Vercel entry mirrors the live Marouf page", async () => {
+test("static Vercel entry keeps the Marouf look without WordPress runtime", async () => {
   const [staticIndex, packageJson] = await Promise.all([
     readFile(new URL("../index.html", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(staticIndex, /Home Page &#8211; The Marouf Method|Home Page – The Marouf Method/);
-  assert.match(staticIndex, /et_pb_section_0_tb_header/);
-  assert.match(staticIndex, /dr_kareem_hero_exact_optimized\.jpg/);
+  assert.match(staticIndex, /The Marouf Method \| Cambridge Biology & Psychology/);
   assert.match(staticIndex, /The Marouf Method/);
+  assert.match(staticIndex, /href="\/about\/"/);
+  assert.match(staticIndex, /href="\/courses\/"/);
+  assert.match(staticIndex, /href="\/books\/"/);
+  assert.match(staticIndex, /id="quizzes"/);
+  assert.match(staticIndex, /data-track="register_header"/);
   assert.match(staticIndex, /#080808/);
   assert.match(staticIndex, /#C9A65A|#c9a65a/);
+  assert.doesNotMatch(staticIndex, /et_pb_|wp-content|drkareemmarouf\.com/);
   assert.doesNotMatch(staticIndex, /<iframe|SkeletonPreview|codex-preview|Your site is taking shape/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 });

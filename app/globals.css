@@ -20,6 +20,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 110px;
+}
+
 body {
   margin: 0;
   background: var(--navy);
@@ -135,6 +139,12 @@ nav a {
 .btn.secondary {
   background: transparent;
   color: var(--cream);
+}
+
+.btn.whatsapp {
+  border-color: #25d366;
+  background: #25d366;
+  color: #ffffff;
 }
 
 .btn:hover,
