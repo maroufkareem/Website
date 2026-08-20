@@ -23,28 +23,36 @@ async function render() {
   );
 }
 
-test("server-renders the exact Marouf Method mirror", async () => {
+test("server-renders the fast native Marouf Method page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /<title>Home Page - The Marouf Method<\/title>/i);
-  assert.match(html, /<iframe/i);
-  assert.match(html, /src="https:\/\/drkareemmarouf\.com\/home-page\/"/);
-  assert.match(html, /title="The Marouf Method"/);
+  assert.match(html, /DR\. KAREEM WAEL MAAROUF/);
+  assert.match(html, /Where\s*Knowledge\s*Becomes\s*Mastery/);
+  assert.match(html, /Cambridge Biology O Level/);
+  assert.match(html, /Cambridge Psychology O Level/);
+  assert.match(html, /class="hero"/);
+  assert.doesNotMatch(html, /<iframe/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|SkeletonPreview/);
 });
 
-test("source is free of temporary starter preview code", async () => {
-  const [page, layout, packageJson] = await Promise.all([
+test("source is free of iframe and temporary starter preview code", async () => {
+  const [page, styles, layout, staticIndex, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../index.html", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /https:\/\/drkareemmarouf\.com\/home-page\//);
+  assert.match(page, /The Marouf Method/);
+  assert.match(styles, /\/marouf-assets\/hero\.jpg/);
+  assert.match(staticIndex, /\/marouf-assets\/hero\.jpg/);
   assert.match(layout, /Home Page - The Marouf Method/);
+  assert.doesNotMatch(page + staticIndex, /<iframe|drkareemmarouf\.com\/home-page\//);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  assert.doesNotMatch(page + layout, /SkeletonPreview|codex-preview|Your site is taking shape/);
+  assert.doesNotMatch(page + layout + staticIndex, /SkeletonPreview|codex-preview|Your site is taking shape/);
 });
