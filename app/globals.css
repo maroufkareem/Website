@@ -2,9 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --navy: #001d39;
-  --navy-2: #082844;
-  --navy-3: #071526;
+  --navy: #050505;
+  --navy-2: #111111;
+  --navy-3: #000000;
   --cream: #fcfaf6;
   --muted: #d8d5cf;
   --gold: #c9a65a;
@@ -52,7 +52,7 @@ img {
   gap: 22px;
   min-height: 92px;
   padding: 18px 4.8vw;
-  background: rgba(0, 29, 57, 0.92);
+  background: rgba(5, 5, 5, 0.92);
   border-bottom: 1px solid rgba(201, 166, 90, 0.22);
   backdrop-filter: blur(12px);
 }
@@ -154,8 +154,8 @@ nav a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(0, 29, 57, 0.98) 0%, rgba(0, 29, 57, 0.82) 42%, rgba(0, 29, 57, 0.22) 100%),
-    linear-gradient(180deg, rgba(0, 29, 57, 0.25), rgba(0, 29, 57, 0.9));
+    linear-gradient(90deg, rgba(5, 5, 5, 0.98) 0%, rgba(5, 5, 5, 0.82) 42%, rgba(5, 5, 5, 0.22) 100%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.25), rgba(5, 5, 5, 0.9));
 }
 
 .hero-content {
@@ -267,7 +267,7 @@ h1 span {
 .achievement-grid article,
 .testimonial-grid article,
 .parent-note {
-  background: rgba(0, 29, 57, 0.84);
+  background: rgba(5, 5, 5, 0.84);
   border: 1px solid rgba(201, 166, 90, 0.22);
 }
 
@@ -670,7 +670,7 @@ cite span {
 .enrollment {
   text-align: center;
   background:
-    linear-gradient(rgba(0, 29, 57, 0.88), rgba(0, 29, 57, 0.88)),
+    linear-gradient(rgba(5, 5, 5, 0.88), rgba(5, 5, 5, 0.88)),
     url("/marouf-assets/hero.jpg") center / cover;
 }
 
@@ -698,7 +698,7 @@ footer {
   display: grid;
   grid-template-columns: 1.4fr repeat(3, 1fr);
   gap: 46px;
-  background: #061625;
+  background: #050505;
   border-top: 1px solid var(--line);
 }
 
@@ -782,7 +782,7 @@ footer a {
   }
 
   .hero-overlay {
-    background: linear-gradient(90deg, rgba(0, 29, 57, 0.98), rgba(0, 29, 57, 0.68));
+    background: linear-gradient(90deg, rgba(5, 5, 5, 0.98), rgba(5, 5, 5, 0.68));
   }
 
   .doctor-name {
