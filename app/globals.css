@@ -46,7 +46,11 @@ img {
 
 .site-header {
   position: fixed;
-  z-index: 50;
+  /* Higher than .mobile-nav-overlay/.mobile-nav-panel (90/95): those are
+     portaled to <body> as siblings of this header, so their z-index
+     compares directly against this one, not against the toggle button's
+     z-index nested inside it. */
+  z-index: 100;
   top: 0;
   left: 0;
   right: 0;
@@ -100,7 +104,7 @@ img {
   letter-spacing: 1.5px;
 }
 
-nav {
+.site-header nav {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,7 +112,7 @@ nav {
   flex: 1;
 }
 
-nav a {
+.site-header nav a {
   color: rgba(252, 250, 246, 0.88);
   font-size: 13px;
   font-weight: 700;
@@ -203,6 +207,9 @@ nav a {
   width: min(320px, 84vw);
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
   gap: 4px;
   padding: 100px 28px 40px;
   background: var(--navy-2);
@@ -905,7 +912,7 @@ footer a {
 }
 
 @media (max-width: 1120px) {
-  nav {
+  .site-header nav {
     display: none;
   }
 
