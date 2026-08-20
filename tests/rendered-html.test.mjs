@@ -54,22 +54,26 @@ test("source is free of temporary starter preview code", async () => {
   assert.doesNotMatch(page + layout, /SkeletonPreview|codex-preview|Your site is taking shape/);
 });
 
-test("static Vercel entry keeps the Marouf look without WordPress runtime", async () => {
+test("static Vercel entry mirrors the WordPress screenshot design", async () => {
   const [staticIndex, packageJson] = await Promise.all([
     readFile(new URL("../index.html", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(staticIndex, /The Marouf Method \| Cambridge Biology & Psychology/);
+  assert.match(staticIndex, /Home Page &#8211; The Marouf Method/);
   assert.match(staticIndex, /The Marouf Method/);
-  assert.match(staticIndex, /href="\/about\/"/);
-  assert.match(staticIndex, /href="\/courses\/"/);
-  assert.match(staticIndex, /href="\/books\/"/);
-  assert.match(staticIndex, /id="quizzes"/);
-  assert.match(staticIndex, /data-track="register_header"/);
+  assert.match(staticIndex, /et_pb_section_0_tb_header/);
+  assert.match(staticIndex, /et_pb_menu_0_tb_header/);
+  assert.match(staticIndex, /wp-theme-Divi/);
+  assert.match(staticIndex, /href="#about"/);
+  assert.match(staticIndex, /href="#courses"/);
+  assert.match(staticIndex, /href="#books"/);
+  assert.match(staticIndex, /href="#quizzes"/);
+  assert.match(staticIndex, /CAMBRIDGE BIOLOGY &amp; PSYCHOLOGY EDUCATION/);
+  assert.match(staticIndex, /Where[\s\S]*Knowledge[\s\S]*Becomes[\s\S]*Mastery/);
   assert.match(staticIndex, /#080808/);
   assert.match(staticIndex, /#C9A65A|#c9a65a/);
-  assert.doesNotMatch(staticIndex, /et_pb_|wp-content|drkareemmarouf\.com/);
-  assert.doesNotMatch(staticIndex, /<iframe|SkeletonPreview|codex-preview|Your site is taking shape/);
+  assert.match(staticIndex, /drkareemmarouf\.com\/wp-content\/uploads/);
+  assert.doesNotMatch(staticIndex, /SkeletonPreview|codex-preview|Your site is taking shape/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 });
