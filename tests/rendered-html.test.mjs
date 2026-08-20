@@ -1,79 +1,44 @@
+// Smoke test for the Next.js app. `npm test` runs `next build` first (see
+// package.json), which is the primary check: it fails loudly if the app
+// doesn't compile. The public page (app/page.tsx) is a database-backed
+// server component (`export const dynamic = "force-dynamic"`), so it can't
+// be rendered here without a live DATABASE_URL — instead these tests check
+// that the source still contains the site's core content/structure and that
+// the database schema/query layer it depends on is in place, preserving the
+// "does this still look like the Marouf Method site" intent of the previous
+// vinext-era test in a way that doesn't require a live database.
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+const rootDir = new URL("..", import.meta.url);
 
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
-}
-
-test("server-renders the fast native Marouf Method page", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, /<title>The Marouf Method \| Cambridge Biology (?:&amp;|&) Psychology<\/title>/i);
-  assert.match(html, /DR\. KAREEM WAEL MAAROUF/);
-  assert.match(html, /Where\s*Knowledge\s*Becomes\s*Mastery/);
-  assert.match(html, /Cambridge Biology O Level/);
-  assert.match(html, /Cambridge Psychology O Level/);
-  assert.match(html, /class="hero"/);
-  assert.doesNotMatch(html, /<iframe/i);
-  assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|SkeletonPreview/);
-});
-
-test("source is free of temporary starter preview code", async () => {
-  const [page, styles, layout, packageJson] = await Promise.all([
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
+test("source still contains the Marouf Method content and structure", async () => {
+  const [page, styles, layout] = await Promise.all([
+    readFile(new URL("app/page.tsx", rootDir), "utf8"),
+    readFile(new URL("app/globals.css", rootDir), "utf8"),
+    readFile(new URL("app/layout.tsx", rootDir), "utf8"),
   ]);
 
   assert.match(page, /The Marouf Method/);
+  assert.match(page, /className="hero"/);
+  assert.match(page, /className="enrollment"/);
+  assert.match(page, /ContactForm/);
+  assert.match(page, /PageViewBeacon/);
   assert.match(styles, /\/marouf-assets\/hero\.jpg/);
+  assert.match(styles, /--gold: #C9A65A/);
   assert.match(layout, /The Marouf Method \| Cambridge Biology & Psychology/);
-  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  assert.doesNotMatch(page + layout, /SkeletonPreview|codex-preview|Your site is taking shape/);
 });
 
-test("static Vercel entry mirrors the WordPress screenshot design", async () => {
-  const [staticIndex, packageJson] = await Promise.all([
-    readFile(new URL("../index.html", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
+test("database schema and query layer are in place", async () => {
+  const [schema, queries] = await Promise.all([
+    readFile(new URL("db/schema.ts", rootDir), "utf8"),
+    readFile(new URL("db/queries.ts", rootDir), "utf8"),
   ]);
 
-  assert.match(staticIndex, /Home Page &#8211; The Marouf Method/);
-  assert.match(staticIndex, /The Marouf Method/);
-  assert.match(staticIndex, /et_pb_section_0_tb_header/);
-  assert.match(staticIndex, /et_pb_menu_0_tb_header/);
-  assert.match(staticIndex, /wp-theme-Divi/);
-  assert.match(staticIndex, /href="#about"/);
-  assert.match(staticIndex, /href="#courses"/);
-  assert.match(staticIndex, /href="#books"/);
-  assert.match(staticIndex, /href="#quizzes"/);
-  assert.match(staticIndex, /CAMBRIDGE BIOLOGY &amp; PSYCHOLOGY EDUCATION/);
-  assert.match(staticIndex, /Where[\s\S]*Knowledge[\s\S]*Becomes[\s\S]*Mastery/);
-  assert.match(staticIndex, /#080808/);
-  assert.match(staticIndex, /#C9A65A|#c9a65a/);
-  assert.match(staticIndex, /drkareemmarouf\.com\/wp-content\/uploads/);
-  assert.doesNotMatch(staticIndex, /SkeletonPreview|codex-preview|Your site is taking shape/);
-  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  for (const table of ["adminUsers", "siteSettings", "programs", "books", "achievements", "testimonials", "navItems", "enquiries", "pageViews"]) {
+    assert.match(schema, new RegExp(`export const ${table} = pgTable`));
+  }
+  assert.match(queries, /export async function createEnquiry/);
+  assert.match(queries, /export async function recordPageView/);
 });

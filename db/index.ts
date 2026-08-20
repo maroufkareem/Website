@@ -1,13 +1,25 @@
-import { env } from "cloudflare:workers";
-import { drizzle } from "drizzle-orm/d1";
+import { neon } from "@neondatabase/serverless";
+import { drizzle, type NeonHttpDatabase } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
 
-export function getDb() {
-  if (!env.DB) {
+let cached: NeonHttpDatabase<typeof schema> | null = null;
+
+/**
+ * Lazily creates (and memoizes) the Drizzle/Neon client. Deliberately NOT
+ * connected at module import time so that `next build` can succeed without
+ * `DATABASE_URL` being set (e.g. in CI or this sandbox with no live DB).
+ */
+export function getDb(): NeonHttpDatabase<typeof schema> {
+  if (cached) return cached;
+
+  const url = process.env.DATABASE_URL;
+  if (!url) {
     throw new Error(
-      "Cloudflare D1 binding `DB` is unavailable. Set the `d1` field in .openai/hosting.json to `DB` or let your control plane inject the real binding values before using the database."
+      "DATABASE_URL is not set. Configure it in your environment (Vercel project settings or .env.local) before making database calls."
     );
   }
 
-  return drizzle(env.DB, { schema });
+  const sql = neon(url);
+  cached = drizzle(sql, { schema });
+  return cached;
 }
