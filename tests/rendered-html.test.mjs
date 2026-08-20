@@ -23,18 +23,16 @@ async function render() {
   );
 }
 
-test("server-renders the Marouf Method landing page", async () => {
+test("server-renders the exact Marouf Method mirror", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /<title>Home Page - The Marouf Method<\/title>/i);
-  assert.match(html, /The Marouf Method/);
-  assert.match(html, /DR\. KAREEM WAEL MAAROUF/);
-  assert.match(html, /Where Knowledge Becomes Mastery/);
-  assert.match(html, /Cambridge Biology O Level/);
-  assert.match(html, /Psychology O Level/);
+  assert.match(html, /<iframe/i);
+  assert.match(html, /src="https:\/\/drkareemmarouf\.com\/home-page\/"/);
+  assert.match(html, /title="The Marouf Method"/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|SkeletonPreview/);
 });
 
@@ -45,7 +43,7 @@ test("source is free of temporary starter preview code", async () => {
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /The Marouf Method/);
+  assert.match(page, /https:\/\/drkareemmarouf\.com\/home-page\//);
   assert.match(layout, /Home Page - The Marouf Method/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page + layout, /SkeletonPreview|codex-preview|Your site is taking shape/);
