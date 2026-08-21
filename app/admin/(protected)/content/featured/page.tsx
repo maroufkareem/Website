@@ -28,8 +28,7 @@ export default async function FeaturedContentPage() {
           name="featuredChecklist"
           defaultValue={(settings?.featuredChecklist ?? []).join("\n")}
         />
-        <ImageUpload label="Image 1" name="featuredImage1Url" defaultValue={settings?.featuredImage1Url} />
-        <ImageUpload label="Image 2" name="featuredImage2Url" defaultValue={settings?.featuredImage2Url} />
+        <ImageUpload label="Featured Image" name="featuredImage1Url" defaultValue={settings?.featuredImage1Url} />
         <SaveButton />
       </form>
     </div>

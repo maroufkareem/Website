@@ -18,6 +18,33 @@ import ContactForm from "@/app/components/ContactForm";
 import PageViewBeacon from "@/app/components/PageViewBeacon";
 import MobileNav from "@/app/components/MobileNav";
 
+const iconProps = {
+  width: 22,
+  height: 22,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.6,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const badgeIcons = [
+  <svg key="cap" {...iconProps} aria-hidden="true">
+    <path d="M12 3 2 8l10 5 10-5-10-5Z" />
+    <path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5" />
+  </svg>,
+  <svg key="monitor" {...iconProps} aria-hidden="true">
+    <rect x="3" y="4" width="18" height="12" rx="1.5" />
+    <path d="M8 20h8M12 16v4" />
+  </svg>,
+  <svg key="badge" {...iconProps} aria-hidden="true">
+    <rect x="5" y="3" width="14" height="18" rx="2" />
+    <circle cx="12" cy="10" r="3" />
+    <path d="M9 21v-3.5a3 3 0 0 1 6 0V21" />
+  </svg>,
+];
+
 // The public site reads all content from the database at request time, so
 // it must never be statically generated at build time (there's no live DB
 // during `next build` in some environments, and content should always be
@@ -61,7 +88,10 @@ export default async function Home() {
 
       <header className="site-header">
         <a className="brand" href="#home" aria-label="The Marouf Method home">
-          <span className="brand-mark">M</span>
+          <span className="brand-mark">
+            <span className="brand-mark-script">Kareem</span>
+            <span className="brand-mark-caption">MAROUF</span>
+          </span>
           <span>
             <strong>The Marouf Method</strong>
             <small>WHERE KNOWLEDGE BECOMES MASTERY</small>
@@ -95,8 +125,11 @@ export default async function Home() {
           </div>
         </div>
         <div className="hero-badges" aria-label="Program highlights">
-          {heroBadges.map((badge) => (
-            <span key={badge}>{badge}</span>
+          {heroBadges.map((badge, index) => (
+            <span key={badge}>
+              {badgeIcons[index % badgeIcons.length]}
+              {badge}
+            </span>
           ))}
         </div>
       </section>
@@ -153,7 +186,7 @@ export default async function Home() {
       </section>
 
       <section className="section method">
-        <p className="eyebrow gold">TEACHING METHODOLOGY</p>
+        <p className="eyebrow gold center">TEACHING METHODOLOGY</p>
         <div className="method-head">
           <h2>The Marouf Method</h2>
           <p>A clearer path from complex concepts to confident answers.</p>
@@ -177,10 +210,12 @@ export default async function Home() {
           {books.map((book) => (
             <article className="book-card" key={book.title}>
               <img src={book.imageUrl} alt={book.title} />
-              <span>{book.label}</span>
-              <h3>{book.title}</h3>
-              <p>{book.body}</p>
-              <a className="order" href="#contact">ORDER NOW</a>
+              <div>
+                <span>{book.label}</span>
+                <h3>{book.title}</h3>
+                <p>{book.body}</p>
+                <a className="order" href="#contact">ORDER NOW</a>
+              </div>
             </article>
           ))}
         </div>
@@ -188,11 +223,10 @@ export default async function Home() {
 
       <section className="featured">
         <div className="featured-images">
+          <p className="pill">NOW AVAILABLE</p>
           <img src={settings.featuredImage1Url} alt="Biology guide preview" />
-          <img src={settings.featuredImage2Url} alt="Biology guide second preview" />
         </div>
         <div>
-          <p className="pill">NOW AVAILABLE</p>
           <p className="eyebrow gold">{settings.featuredEyebrow}</p>
           <h2>A Complete Biology <span>Companion</span></h2>
           <p>{settings.featuredBody}</p>
@@ -215,6 +249,9 @@ export default async function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="section quote-band">
         <blockquote>
           &quot;Biology comes to life when every detail connects,<br /> every concept finds meaning, and understanding turns knowledge into mastery.&quot;
           <cite>Dr. Kareem Wael Maarouf <span>FOUNDER - THE MAROUF METHOD</span></cite>
@@ -222,8 +259,8 @@ export default async function Home() {
       </section>
 
       <section className="section testimonials" id="testimonials">
-        <p className="eyebrow gold">STUDENT EXPERIENCES</p>
-        <h2>Learning That <span>Changes Confidence</span></h2>
+        <p className="eyebrow gold center">STUDENT EXPERIENCES</p>
+        <h2 className="center">Learning That <span>Changes Confidence</span></h2>
         <div className="testimonial-grid">
           {testimonials.map((testimonial) => (
             <article key={testimonial.author + testimonial.body.slice(0, 10)}>
@@ -233,7 +270,9 @@ export default async function Home() {
             </article>
           ))}
         </div>
-        <a className="btn secondary" href="#testimonials">READ MORE STUDENT STORIES</a>
+        <div className="center">
+          <a className="btn secondary" href="#testimonials">READ MORE STUDENT STORIES</a>
+        </div>
         <div className="parent-note">
           <span>&quot;</span>
           <p>Thank you for your effort with the students and for making them love the subject.</p>
@@ -247,7 +286,7 @@ export default async function Home() {
         <p>Reserve your place in The Marouf Method&apos;s Biology or Psychology program and build the understanding, confidence, and exam skills needed for lasting success.</p>
         <div className="actions">
           <a className="btn primary" href={`mailto:${contactEmail}`}>REGISTER NOW</a>
-          <a className="btn secondary" href={whatsappHref}>CHAT ON WHATSAPP</a>
+          <a className="btn whatsapp" href={whatsappHref}>CHAT ON WHATSAPP</a>
         </div>
         <p className="contact-line">- {contactPhone}    - {contactEmail}</p>
         <ContactForm programOptions={programs.map((program) => program.title)} />
