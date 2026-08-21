@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Dancing+Script:wght@600;700&family=Open+Sans:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --font-serif: "Cinzel", Georgia, serif;
+}
+
 :root {
   --navy: #080808;
   --navy-2: #111111;
@@ -327,29 +331,32 @@ img {
 }
 
 .doctor-role span,
-h1 span:nth-child(3),
-h2 span {
+.site h1 span:nth-child(3),
+.site h2 span {
   color: var(--gold);
   font-style: italic;
 }
 
-h1,
-h2,
-h3 {
+/* Scoped to .site (the public marketing page) so these don't leak into the
+   admin panel, which renders plain <h1>/<h2>/<h3> tags styled with Tailwind
+   utility classes instead. */
+.site h1,
+.site h2,
+.site h3 {
   margin: 0;
   font-family: "Cinzel", Georgia, serif;
   line-height: 1.04;
   letter-spacing: 0;
 }
 
-h1 {
+.site h1 {
   margin-bottom: 26px;
   font-size: clamp(58px, 8vw, 126px);
   font-weight: 800;
   text-transform: none;
 }
 
-h1 span {
+.site h1 span {
   display: block;
 }
 
@@ -505,7 +512,7 @@ footer {
   object-fit: cover;
 }
 
-h2 {
+.site h2 {
   margin-bottom: 24px;
   color: var(--cream);
   font-size: clamp(39px, 5.1vw, 72px);

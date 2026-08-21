@@ -83,7 +83,7 @@ export default async function Home() {
   const contactPhone = settings.contactPhone || DEFAULT_SITE_SETTINGS.contactPhone;
 
   return (
-    <main>
+    <main className="site">
       <PageViewBeacon />
 
       <header className="site-header">
