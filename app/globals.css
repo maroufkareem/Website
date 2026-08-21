@@ -1114,7 +1114,7 @@ footer a {
     font-size: 22px;
   }
 
-  h1 {
+  .site h1 {
     font-size: 58px;
   }
 
@@ -1154,7 +1154,7 @@ footer a {
     gap: 42px;
   }
 
-  h2 {
+  .site h2 {
     font-size: 41px;
   }
 
