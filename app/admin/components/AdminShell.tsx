@@ -131,7 +131,7 @@ export default function AdminShell({
         </div>
       </aside>
 
-      <div className="flex flex-1 flex-col pt-14 md:pt-0">
+      <div className="flex min-w-0 flex-1 flex-col pt-14 md:pt-0">
         <header className="hidden items-center justify-between border-b border-[#C9A65A]/20 bg-[#111111] px-6 py-4 md:flex">
           <p className="text-sm text-neutral-400">
             Signed in as <span className="font-semibold text-[#FCFAF6]">{email}</span>
@@ -144,7 +144,7 @@ export default function AdminShell({
             View site ↗
           </Link>
         </header>
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="min-w-0 flex-1 p-4 md:p-6">{children}</main>
       </div>
     </div>
   );
