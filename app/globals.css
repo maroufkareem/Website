@@ -1139,7 +1139,34 @@ footer a {
 
   .stats-grid {
     margin-top: 0;
-    padding: 0;
+    padding: 24px 24px 0;
+    row-gap: 28px;
+  }
+
+  .stat {
+    padding: 20px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--line-light);
+  }
+
+  .stat:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .step-grid {
+    row-gap: 32px;
+  }
+
+  .step {
+    padding: 24px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--line-light);
+  }
+
+  .step:first-child {
+    border-top: none;
+    padding-top: 0;
   }
 
   .section,
