@@ -69,9 +69,17 @@ export default async function Home() {
       >
         <div className="hero-overlay" />
         <div className="hero-photo-mobile" />
+
+        {/* Floats over the photo on desktop; hidden below 821px, where the
+            inline copy inside .hero-content takes over instead (see CSS). */}
+        <div className="doctor-card doctor-card-float">
+          <p className="doctor-name">{settings.heroDoctorName}</p>
+          <p className="doctor-role">{settings.heroDoctorRole}<br /><span>Educator by Passion.</span></p>
+        </div>
+
         <div className="hero-content">
           <p className="eyebrow">{settings.heroEyebrow}</p>
-          <div className="doctor-card">
+          <div className="doctor-card doctor-card-inline">
             <p className="doctor-name">{settings.heroDoctorName}</p>
             <p className="doctor-role">{settings.heroDoctorRole}<br /><span>Educator by Passion.</span></p>
           </div>

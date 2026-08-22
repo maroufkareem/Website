@@ -320,16 +320,28 @@ img {
   color: var(--gold);
 }
 
-.doctor-card {
-  margin-bottom: 28px;
+.doctor-card-inline {
+  display: none;
+}
+
+.doctor-card-float {
+  position: absolute;
+  z-index: 4;
+  right: 6vw;
+  bottom: 22%;
+  max-width: 320px;
+  padding: 20px 26px;
+  border: 1px solid var(--gold);
+  background: rgba(8, 8, 8, 0.82);
 }
 
 .doctor-name {
   margin: 0;
   color: var(--gold);
   font-family: "Cinzel", serif;
-  font-size: 25px;
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 1.6px;
   white-space: nowrap;
 }
 
@@ -337,7 +349,7 @@ img {
   margin: 5px 0 0;
   color: rgba(252, 250, 246, 0.88);
   font-family: "Cinzel", serif;
-  font-size: 31px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.25;
 }
@@ -1132,6 +1144,15 @@ footer a {
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, rgba(8, 8, 8, 0) 55%, rgba(8, 8, 8, 0.96) 100%);
+  }
+
+  .doctor-card-float {
+    display: none;
+  }
+
+  .doctor-card-inline {
+    display: block;
+    margin-bottom: 28px;
   }
 
   .doctor-name {
