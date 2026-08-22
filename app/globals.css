@@ -277,7 +277,7 @@ img {
   min-height: 980px;
   padding: 185px 5vw 72px;
   overflow: hidden;
-  background-image: url("/marouf-assets/hero.jpg");
+  background-image: var(--hero-image);
   background-position: center top;
   background-size: cover;
 }
@@ -288,6 +288,18 @@ img {
   background:
     radial-gradient(circle at 78% 50%, rgba(201, 154, 90, 0.1) 0%, rgba(201, 154, 90, 0.04) 16%, rgba(0, 0, 0, 0) 36%),
     linear-gradient(90deg, rgba(3, 5, 8, 0.98) 0%, rgba(6, 9, 13, 0.97) 22%, rgba(13, 17, 24, 0.95) 42%, rgba(25, 28, 34, 0.92) 65%, rgba(40, 40, 42, 0.88) 82%, rgba(24, 21, 18, 0.9) 100%);
+}
+
+/* Shown only on mobile (below 820px) as a standalone photo band above the
+   hero text — see the 820px media query. The wide hero.jpg is composed for
+   a two-column desktop layout (dark fade on the left for text, subject on
+   the right); at phone widths the text needs the full width to stay
+   readable, so overlaying it directly on the photo either hides the subject
+   behind a heavy gradient or crops him out entirely depending on
+   background-position. Splitting into a clear photo band + text below
+   keeps the subject visible, matching the desktop version's clarity. */
+.hero-photo-mobile {
+  display: none;
 }
 
 .hero-content {
@@ -1096,13 +1108,30 @@ footer a {
   }
 
   .hero {
-    min-height: 840px;
-    padding: 130px 24px 50px;
-    background-position: 58% top;
+    min-height: 0;
+    padding: 96px 24px 50px;
+    background-image: none;
   }
 
   .hero-overlay {
-    background: linear-gradient(90deg, rgba(3, 5, 8, 0.98), rgba(24, 21, 18, 0.68));
+    display: none;
+  }
+
+  .hero-photo-mobile {
+    display: block;
+    position: relative;
+    height: 340px;
+    margin: 0 -24px 32px;
+    background-image: var(--hero-image);
+    background-position: 74% 22%;
+    background-size: cover;
+  }
+
+  .hero-photo-mobile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8, 8, 8, 0) 55%, rgba(8, 8, 8, 0.96) 100%);
   }
 
   .doctor-name {

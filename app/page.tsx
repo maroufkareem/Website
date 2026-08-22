@@ -108,8 +108,13 @@ export default async function Home() {
         <MobileNav navItems={navItems} />
       </header>
 
-      <section className="hero" id="home">
+      <section
+        className="hero"
+        id="home"
+        style={{ "--hero-image": `url(${settings.heroImageUrl})` } as React.CSSProperties}
+      >
         <div className="hero-overlay" />
+        <div className="hero-photo-mobile" />
         <div className="hero-content">
           <p className="eyebrow">{settings.heroEyebrow}</p>
           <div className="doctor-card">
