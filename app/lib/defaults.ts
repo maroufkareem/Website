@@ -2,17 +2,15 @@
 // never breaks/crashes if the database is empty or temporarily unreachable.
 import type { SiteStat, MethodStep } from "@/db/schema";
 
-// Hrefs point at in-page anchors, matching the section ids the site actually
-// renders (this is a single-page site — there are no separate sub-pages).
 export const DEFAULT_NAV_ITEMS: { label: string; href: string }[] = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Courses", href: "#courses" },
-  { label: "Books", href: "#books" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
-  { label: "Quizzes", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Courses", href: "/courses" },
+  { label: "Books", href: "/books" },
+  { label: "Achievements", href: "/achievements" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "Contact", href: "/contact" },
+  { label: "Quizzes", href: "/quizzes" },
 ];
 
 export const DEFAULT_STATS: SiteStat[] = [

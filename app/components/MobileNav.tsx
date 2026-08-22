@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 
 type NavItem = { label: string; href: string };
 
@@ -79,17 +80,17 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
               aria-hidden={!open}
             >
               {navItems.map((item) => (
-                <a href={item.href} key={item.label} onClick={() => setOpen(false)}>
+                <Link href={item.href} key={item.label} onClick={() => setOpen(false)}>
                   {item.label}
-                </a>
+                </Link>
               ))}
-              <a
+              <Link
                 className="btn primary mobile-nav-cta"
-                href="#contact"
+                href="/contact"
                 onClick={() => setOpen(false)}
               >
                 REGISTER NOW
-              </a>
+              </Link>
             </nav>
           </>,
           document.body

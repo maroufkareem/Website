@@ -119,14 +119,14 @@ const db = drizzle(sql);
 // Hrefs point at in-page anchors, matching the section ids the site actually
 // renders (this is a single-page site — there are no separate sub-pages).
 const NAV_ITEMS = [
-  { label: "Home", href: "#home", sortOrder: 0 },
-  { label: "About", href: "#about", sortOrder: 1 },
-  { label: "Courses", href: "#courses", sortOrder: 2 },
-  { label: "Books", href: "#books", sortOrder: 3 },
-  { label: "Achievements", href: "#achievements", sortOrder: 4 },
-  { label: "Testimonials", href: "#testimonials", sortOrder: 5 },
-  { label: "Contact", href: "#contact", sortOrder: 6 },
-  { label: "Quizzes", href: "#contact", sortOrder: 7 },
+  { label: "Home", href: "/", sortOrder: 0 },
+  { label: "About", href: "/about", sortOrder: 1 },
+  { label: "Courses", href: "/courses", sortOrder: 2 },
+  { label: "Books", href: "/books", sortOrder: 3 },
+  { label: "Achievements", href: "/achievements", sortOrder: 4 },
+  { label: "Testimonials", href: "/testimonials", sortOrder: 5 },
+  { label: "Contact", href: "/contact", sortOrder: 6 },
+  { label: "Quizzes", href: "/quizzes", sortOrder: 7 },
 ];
 
 const STATS = [

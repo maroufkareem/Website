@@ -1,22 +1,8 @@
-import {
-  getAchievements,
-  getBooks,
-  getNavItems,
-  getPrograms,
-  getSiteSettings,
-  getTestimonials,
-} from "@/db/queries";
-import {
-  DEFAULT_ACHIEVEMENTS,
-  DEFAULT_BOOKS,
-  DEFAULT_NAV_ITEMS,
-  DEFAULT_PROGRAMS,
-  DEFAULT_SITE_SETTINGS,
-  DEFAULT_TESTIMONIALS,
-} from "@/app/lib/defaults";
+import { getSiteData } from "@/app/lib/site-data";
 import ContactForm from "@/app/components/ContactForm";
 import PageViewBeacon from "@/app/components/PageViewBeacon";
-import MobileNav from "@/app/components/MobileNav";
+import SiteHeader from "@/app/components/SiteHeader";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const iconProps = {
   width: 22,
@@ -52,61 +38,29 @@ const badgeIcons = [
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [settingsRow, programsRows, booksRows, achievementsRows, testimonialsRows, navRows] =
-    await Promise.all([
-      getSiteSettings().catch(() => null),
-      getPrograms().catch(() => []),
-      getBooks().catch(() => []),
-      getAchievements().catch(() => []),
-      getTestimonials().catch(() => []),
-      getNavItems().catch(() => []),
-    ]);
-
-  const settings = settingsRow ?? DEFAULT_SITE_SETTINGS;
-  const programs = programsRows.length > 0 ? programsRows : DEFAULT_PROGRAMS;
-  const books = booksRows.length > 0 ? booksRows : DEFAULT_BOOKS;
-  const achievements = achievementsRows.length > 0 ? achievementsRows : DEFAULT_ACHIEVEMENTS;
-  const testimonials = testimonialsRows.length > 0 ? testimonialsRows : DEFAULT_TESTIMONIALS;
-  const navItems = navRows.length > 0 ? navRows : DEFAULT_NAV_ITEMS;
-  const stats = settings.stats?.length ? settings.stats : DEFAULT_SITE_SETTINGS.stats;
-  const methodSteps = settings.methodSteps?.length ? settings.methodSteps : DEFAULT_SITE_SETTINGS.methodSteps;
-  const aboutCredentials = settings.aboutCredentials?.length
-    ? settings.aboutCredentials
-    : DEFAULT_SITE_SETTINGS.aboutCredentials;
-  const heroBadges = settings.heroBadges?.length ? settings.heroBadges : DEFAULT_SITE_SETTINGS.heroBadges;
-  const featuredChecklist = settings.featuredChecklist?.length
-    ? settings.featuredChecklist
-    : DEFAULT_SITE_SETTINGS.featuredChecklist;
-  const social = { ...DEFAULT_SITE_SETTINGS.socialLinks, ...(settings.socialLinks ?? {}) };
-  const whatsappHref = settings.contactWhatsapp || DEFAULT_SITE_SETTINGS.contactWhatsapp;
-  const contactEmail = settings.contactEmail || DEFAULT_SITE_SETTINGS.contactEmail;
-  const contactPhone = settings.contactPhone || DEFAULT_SITE_SETTINGS.contactPhone;
+  const {
+    settings,
+    programs,
+    books,
+    achievements,
+    testimonials,
+    navItems,
+    stats,
+    methodSteps,
+    aboutCredentials,
+    heroBadges,
+    featuredChecklist,
+    social,
+    whatsappHref,
+    contactEmail,
+    contactPhone,
+  } = await getSiteData();
 
   return (
     <main className="site">
       <PageViewBeacon />
 
-      <header className="site-header">
-        <a className="brand" href="#home" aria-label="The Marouf Method home">
-          <span className="brand-mark">
-            <span className="brand-mark-script">Kareem</span>
-            <span className="brand-mark-caption">MAROUF</span>
-          </span>
-          <span>
-            <strong>The Marouf Method</strong>
-            <small>WHERE KNOWLEDGE BECOMES MASTERY</small>
-          </span>
-        </a>
-        <nav aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <a href={item.href} key={item.label}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <a className="header-cta" href="#contact">REGISTER NOW</a>
-        <MobileNav navItems={navItems} />
-      </header>
+      <SiteHeader navItems={navItems} />
 
       <section
         className="hero"
@@ -125,8 +79,8 @@ export default async function Home() {
           <p className="hero-copy">{settings.heroCopy}</p>
           <p className="quote">{settings.heroQuote}</p>
           <div className="actions">
-            <a className="btn primary" href="#courses">EXPLORE COURSES</a>
-            <a className="btn secondary" href="#books">DISCOVER BOOKS</a>
+            <a className="btn primary" href="/courses">EXPLORE COURSES</a>
+            <a className="btn secondary" href="/books">DISCOVER BOOKS</a>
           </div>
         </div>
         <div className="hero-badges" aria-label="Program highlights">
@@ -163,7 +117,7 @@ export default async function Home() {
               <li key={credential}>{credential}</li>
             ))}
           </ul>
-          <a className="btn primary" href="#achievements">MEET DR. KAREEM</a>
+          <a className="btn primary" href="/achievements">MEET DR. KAREEM</a>
         </div>
       </section>
 
@@ -182,8 +136,8 @@ export default async function Home() {
               <p className="date">{program.date}</p>
               <p>{program.body}</p>
               <div className="actions small">
-                <a className="btn secondary" href="#courses">VIEW PROGRAM</a>
-                <a className="btn primary" href="#contact">RESERVE YOUR PLACE</a>
+                <a className="btn secondary" href="/courses">VIEW PROGRAM</a>
+                <a className="btn primary" href="/contact">RESERVE YOUR PLACE</a>
               </div>
             </article>
           ))}
@@ -219,7 +173,7 @@ export default async function Home() {
                 <span>{book.label}</span>
                 <h3>{book.title}</h3>
                 <p>{book.body}</p>
-                <a className="order" href="#contact">ORDER NOW</a>
+                <a className="order" href="/contact">ORDER NOW</a>
               </div>
             </article>
           ))}
@@ -276,7 +230,7 @@ export default async function Home() {
           ))}
         </div>
         <div className="center">
-          <a className="btn secondary" href="#testimonials">READ MORE STUDENT STORIES</a>
+          <a className="btn secondary" href="/testimonials">READ MORE STUDENT STORIES</a>
         </div>
         <div className="parent-note">
           <span>&quot;</span>
@@ -297,38 +251,16 @@ export default async function Home() {
         <ContactForm programOptions={programs.map((program) => program.title)} />
       </section>
 
-      <footer>
-        <div>
-          <h3>The Marouf Method</h3>
-          <p>{settings.footerBlurb}</p>
-        </div>
-        <div>
-          <h4>QUICK LINKS</h4>
-          {navItems.slice(0, 7).map((item) => <a href={item.href} key={item.label}>{item.label}</a>)}
-        </div>
-        <div>
-          <h4>PROGRAMS</h4>
-          {programs.slice(0, 2).map((program) => (
-            <a href="#courses" key={program.title}>{program.title}</a>
-          ))}
-          {books.slice(0, 2).map((book) => (
-            <a href="#books" key={book.title}>{book.title}</a>
-          ))}
-        </div>
-        <div>
-          <h4>CONTACT</h4>
-          <a href={`tel:${contactPhone}`}>{contactPhone}</a>
-          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-          <a href={social.instagram || "#"}>Instagram</a>
-          <a href={social.linkedin || "#"}>LinkedIn</a>
-          <a href={social.tiktok || "#"}>TikTok</a>
-          <a href={whatsappHref}>WhatsApp</a>
-        </div>
-        <div className="footer-bottom">
-          <span>© The Marouf Method. All rights reserved.</span>
-          <span>Where Knowledge Becomes Mastery</span>
-        </div>
-      </footer>
+      <SiteFooter
+        navItems={navItems}
+        programs={programs}
+        books={books}
+        footerBlurb={settings.footerBlurb}
+        contactPhone={contactPhone}
+        contactEmail={contactEmail}
+        whatsappHref={whatsappHref}
+        social={social}
+      />
     </main>
   );
 }
