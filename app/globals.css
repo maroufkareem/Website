@@ -274,20 +274,29 @@ img {
 
 .hero {
   position: relative;
-  min-height: 760px;
+  min-height: 860px;
   padding: 165px 5vw 60px;
   overflow: hidden;
   background-image: var(--hero-image);
-  background-position: center 30%;
+  background-position: center 22%;
   background-size: cover;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 78% 50%, rgba(201, 154, 90, 0.1) 0%, rgba(201, 154, 90, 0.04) 16%, rgba(0, 0, 0, 0) 36%),
-    linear-gradient(90deg, rgba(3, 5, 8, 0.98) 0%, rgba(6, 9, 13, 0.97) 22%, rgba(13, 17, 24, 0.95) 42%, rgba(25, 28, 34, 0.92) 65%, rgba(40, 40, 42, 0.88) 82%, rgba(24, 21, 18, 0.9) 100%);
+  /* Strong behind the text column, fading to nearly clear by the time it
+     reaches the subject on the right — the photo should read bright and
+     crisp there, not washed out. */
+  background: linear-gradient(
+    90deg,
+    rgba(3, 5, 8, 0.97) 0%,
+    rgba(5, 7, 11, 0.92) 24%,
+    rgba(8, 8, 8, 0.6) 42%,
+    rgba(8, 8, 8, 0.22) 56%,
+    rgba(8, 8, 8, 0.06) 68%,
+    rgba(8, 8, 8, 0) 82%
+  );
 }
 
 /* Shown only on mobile (below 820px) as a standalone photo band above the
