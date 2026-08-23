@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Dancing+Script:wght@600;700&family=Open+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Dancing+Script:wght@600;700&family=Open+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -515,7 +515,7 @@ footer {
   background: var(--navy);
 }
 
-.section.about,
+.section.about-section,
 .section.method,
 .section.achievements {
   background: var(--cream);
@@ -554,9 +554,10 @@ footer {
 .portrait-wrap {
   position: relative;
   z-index: 1;
-  padding: 18px;
+  padding: 0;
   border: 1px solid var(--line);
   background: var(--cream);
+  box-shadow: 0 18px 40px rgba(20, 16, 8, 0.12);
 }
 
 .portrait-wrap img {
@@ -584,13 +585,27 @@ footer {
   display: block;
   width: 54px;
   height: 1px;
-  margin: 0 0 28px;
+  margin: 0 0 34px;
   background: var(--gold);
 }
 
+/* The reference sets this heading in a true sentence-case serif. Cinzel (the
+   site's display face) ships capitals only, so lowercase renders as small
+   caps — Playfair Display is used here instead to get real lowercase. */
 .about h2 {
-  font-size: clamp(32px, 3.2vw, 48px);
-  line-height: 1.2;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(32px, 2.7vw, 41px);
+  font-weight: 700;
+  line-height: 1.22;
+  margin-bottom: 34px;
+}
+
+/* Reference proportions: a roughly square photo column, a wide gutter, and a
+   text column that keeps the four heading lines intact. */
+.about {
+  grid-template-columns: minmax(260px, 0.98fr) minmax(0, 1fr);
+  gap: 120px;
+  max-width: 1210px;
 }
 
 .btn.about-cta {
@@ -607,7 +622,14 @@ footer p {
   font-weight: 700;
 }
 
-.about p:not(.eyebrow),
+.about p:not(.eyebrow) {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
 .method-head p,
 .step p,
 .book-card p,
@@ -631,6 +653,20 @@ footer p {
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 1.3px;
+}
+
+.about .credentials {
+  margin: 34px 0 40px;
+}
+
+.about .credentials li {
+  margin-bottom: 18px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
+}
+
+.about .credentials li::before {
+  content: "\2014\00a0\00a0\00a0";
 }
 
 .credentials li::before {
@@ -1232,6 +1268,16 @@ footer a {
 
   .hero-badges {
     margin-top: 54px;
+  }
+
+  /* Stacked, the portrait fills the column, so the offset accent square would
+     hang off the right edge and force horizontal scroll. */
+  .about {
+    gap: 44px;
+  }
+
+  .portrait-frame::after {
+    display: none;
   }
 
   .stats-grid {

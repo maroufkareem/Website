@@ -113,7 +113,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section about" id="about">
+      <section className="section about-section" id="about">
+        <div className="about">
         <div className="portrait-frame">
           <div className="portrait-wrap">
             <img src={settings.aboutPortraitUrl} alt="Dr. Kareem Wael Maarouf" />
@@ -122,7 +123,7 @@ export default async function Home() {
         <div>
           <p className="eyebrow gold">{settings.aboutEyebrow}</p>
           <span className="eyebrow-rule" />
-          <h2>Dentist by <span>Profession.</span><br />Educator by <span>Passion.</span></h2>
+          <h2>Dentist by<br /><span>Profession.</span><br />Educator by<br /><span>Passion.</span></h2>
           <p>{settings.aboutParagraph1}</p>
           <p>{settings.aboutParagraph2}</p>
           <ul className="credentials">
@@ -131,6 +132,7 @@ export default async function Home() {
             ))}
           </ul>
           <a className="btn secondary about-cta" href="/achievements">MEET DR. KAREEM</a>
+        </div>
         </div>
       </section>
 

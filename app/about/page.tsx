@@ -20,7 +20,8 @@ export default async function AboutPage() {
       <PageViewBeacon />
       <SiteHeader navItems={navItems} />
 
-      <section className="section about">
+      <section className="section about-section">
+        <div className="about">
         <div className="portrait-frame">
           <div className="portrait-wrap">
             <img src={settings.aboutPortraitUrl} alt="Dr. Kareem Wael Maarouf" />
@@ -29,7 +30,7 @@ export default async function AboutPage() {
         <div>
           <p className="eyebrow gold">{settings.aboutEyebrow}</p>
           <span className="eyebrow-rule" />
-          <h2>Dentist by <span>Profession.</span><br />Educator by <span>Passion.</span></h2>
+          <h2>Dentist by<br /><span>Profession.</span><br />Educator by<br /><span>Passion.</span></h2>
           <p>{settings.aboutParagraph1}</p>
           <p>{settings.aboutParagraph2}</p>
           <ul className="credentials">
@@ -38,6 +39,7 @@ export default async function AboutPage() {
             ))}
           </ul>
           <a className="btn secondary about-cta" href="/achievements">MEET DR. KAREEM</a>
+        </div>
         </div>
       </section>
 
