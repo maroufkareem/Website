@@ -580,6 +580,24 @@ footer {
   color: var(--ink);
 }
 
+.eyebrow-rule {
+  display: block;
+  width: 54px;
+  height: 1px;
+  margin: 0 0 28px;
+  background: var(--gold);
+}
+
+.about h2 {
+  font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1.2;
+}
+
+.btn.about-cta {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
 .program-card p,
 .featured p,
 .enrollment p,

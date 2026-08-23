@@ -121,6 +121,7 @@ export default async function Home() {
         </div>
         <div>
           <p className="eyebrow gold">{settings.aboutEyebrow}</p>
+          <span className="eyebrow-rule" />
           <h2>Dentist by <span>Profession.</span><br />Educator by <span>Passion.</span></h2>
           <p>{settings.aboutParagraph1}</p>
           <p>{settings.aboutParagraph2}</p>
@@ -129,7 +130,7 @@ export default async function Home() {
               <li key={credential}>{credential}</li>
             ))}
           </ul>
-          <a className="btn primary" href="/achievements">MEET DR. KAREEM</a>
+          <a className="btn secondary about-cta" href="/achievements">MEET DR. KAREEM</a>
         </div>
       </section>
 
