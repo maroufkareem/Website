@@ -73,8 +73,8 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 22px;
-  min-height: 92px;
-  padding: 18px 4.8vw;
+  min-height: 78px;
+  padding: 7px 4.8vw;
   background:
     radial-gradient(circle at 78% 50%, rgba(201, 154, 90, 0.1) 0%, rgba(201, 154, 90, 0.04) 16%, rgba(0, 0, 0, 0) 36%),
     linear-gradient(90deg, rgba(3, 5, 8, 0.98) 0%, rgba(6, 9, 13, 0.97) 22%, rgba(13, 17, 24, 0.95) 42%, rgba(25, 28, 34, 0.92) 65%, rgba(40, 40, 42, 0.88) 82%, rgba(24, 21, 18, 0.9) 100%);
@@ -93,8 +93,8 @@ img {
   display: grid;
   place-items: center;
   gap: 1px;
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   border: 2px solid var(--gold);
   border-radius: 50%;
   background: radial-gradient(circle at 50% 35%, rgba(201, 166, 90, 0.22), rgba(201, 166, 90, 0.04) 70%);
@@ -160,8 +160,8 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 45px;
-  padding: 13px 24px;
+  min-height: 48px;
+  padding: 11px 18px;
   border: 2px solid var(--gold);
   color: var(--cream);
   font-family: var(--font-ui);
@@ -292,8 +292,8 @@ img {
 
 .hero {
   position: relative;
-  min-height: 860px;
-  padding: 165px 5vw 60px;
+  min-height: 1030px;
+  padding: 123px 6.35vw 60px;
   overflow: hidden;
   background-image: var(--hero-image);
   background-position: center 22%;
@@ -327,6 +327,10 @@ img {
    keeps the subject visible, matching the desktop version's clarity. */
 .hero-photo-mobile {
   display: none;
+}
+
+.hero-content .eyebrow {
+  margin-bottom: 48px;
 }
 
 .hero-content {
@@ -403,11 +407,13 @@ img {
 }
 
 .site h1 {
-  margin-bottom: 22px;
+  margin-bottom: 47px;
   font-size: clamp(40px, 4.4vw, 66px);
   font-weight: 700;
   letter-spacing: -1px;
-  line-height: 1.02;
+  /* Reference sets a 4-line block at ~347px for a 66px face — the lines are
+     spaced much more openly than the 1.02 the spans themselves carry. */
+  line-height: 1.31;
   text-transform: none;
 }
 
@@ -416,8 +422,8 @@ img {
 }
 
 .hero-copy {
-  max-width: 560px;
-  margin: 0 0 16px;
+  max-width: 500px;
+  margin: 0 0 42px;
   color: #c3c2be;
   font-family: var(--font-body);
   font-size: 15px;
@@ -426,7 +432,7 @@ img {
 }
 
 .quote {
-  margin: 0 0 26px;
+  margin: 0 0 58px;
   color: var(--gold);
   font-family: var(--font-display);
   font-size: 17px;
@@ -1320,6 +1326,22 @@ footer a {
 
   .brand {
     min-width: 0;
+  }
+
+  /* The 64px mark is a desktop value; at phone widths it squeezes the
+     wordmark into two lines. */
+  .brand-mark {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand-mark .brand-mark-script {
+    font-size: 13px;
+  }
+
+  .brand-mark .brand-mark-caption {
+    font-size: 5px;
+    letter-spacing: 1px;
   }
 
   /* The reference's 2.3px tracking is a desktop value; at phone widths it
