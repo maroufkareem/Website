@@ -106,8 +106,9 @@ export default async function Home() {
           {stats.map((stat) => (
             <div className="stat" key={stat.number + stat.label}>
               <strong>{stat.number}</strong>
-              <span>{stat.label}</span>
-              {stat.sub && <small>{stat.sub}</small>}
+              {/* Label and sub read as one flowing line on the reference, not
+                  two stacked blocks. */}
+              <span>{stat.sub ? `${stat.label} ${stat.sub}` : stat.label}</span>
             </div>
           ))}
         </div>

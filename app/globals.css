@@ -292,8 +292,8 @@ img {
 
 .hero {
   position: relative;
-  min-height: 1030px;
-  padding: 123px 6.35vw 60px;
+  min-height: 983px;
+  padding: 123px 6.35vw 25px;
   overflow: hidden;
   background-image: var(--hero-image);
   background-position: center 22%;
@@ -496,8 +496,8 @@ img {
 }
 
 .stats-grid {
-  background: var(--cream);
-  padding: 88px 5vw;
+  background: #f6f0e6;
+  padding: 75px 5vw;
 }
 
 .stats-grid-inner {
@@ -508,7 +508,7 @@ img {
 }
 
 .stat {
-  min-height: 120px;
+  min-height: 205px;
   display: grid;
   align-content: center;
   justify-items: center;
@@ -530,9 +530,15 @@ img {
   line-height: 1;
 }
 
-.stat span,
-.stat small {
+/* The reference drops the wordy last tile ("Bio & Psych") to 47px so it holds
+   one line at the same column width the numeric tiles use. */
+.stat:last-child strong {
+  font-size: clamp(28px, 3.1vw, 47px);
+}
+
+.stat span {
   display: block;
+  margin-top: 10px;
   color: #5c574f;
   font-family: var(--font-ui);
   font-size: 13px;
@@ -541,12 +547,26 @@ img {
   line-height: 1.5;
 }
 
+/* Per-section vertical padding measured off the reference; a flat 110px made
+   the page ~260px taller than the original and pushed every section out of
+   step. */
 .section,
 .featured,
 .enrollment,
 footer {
-  padding: 110px 5vw;
+  padding: 50px 5vw;
 }
+
+.section.about-section { padding-top: 35px; padding-bottom: 35px; }
+.section.programs      { padding-top: 50px; padding-bottom: 50px; }
+.section.method        { padding-top: 50px; padding-bottom: 50px; }
+.section.books         { padding-top: 45px; padding-bottom: 50px; }
+.featured              { padding-top: 55px; padding-bottom: 55px; }
+.section.achievements  { padding-top: 45px; padding-bottom: 45px; }
+.section.testimonials  { padding-top: 38px; padding-bottom: 38px; }
+.enrollment            { padding-top: 48px; padding-bottom: 42px; }
+footer                 { padding-top: 60px; padding-bottom: 24px; }
+.section.quote-band    { padding-top: 65px; padding-bottom: 65px; background: #1d1d1d; }
 
 .section {
   background: var(--navy);
@@ -560,7 +580,11 @@ footer {
 
 .section.books,
 .section.testimonials {
-  background: var(--blush);
+  background: #f6efe6;
+}
+
+.section.programs {
+  background: #0d0d0d;
 }
 
 .about,
@@ -630,6 +654,52 @@ footer {
   height: 1px;
   margin: 0 0 34px;
   background: var(--gold);
+}
+
+.programs h2 {
+  font-size: clamp(34px, 3.6vw, 54px);
+  font-weight: 700;
+}
+
+.method h2 {
+  font-size: clamp(34px, 3.5vw, 52px);
+  font-weight: 700;
+}
+
+.books h2 {
+  font-size: clamp(30px, 3.1vw, 46px);
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.featured h2 {
+  font-size: clamp(32px, 3.1vw, 46px);
+  font-weight: 500;
+}
+
+.achievements h2 {
+  font-size: clamp(30px, 2.9vw, 44px);
+  font-weight: 700;
+}
+
+.achievements h2 span {
+  font-size: clamp(29px, 2.8vw, 42px);
+  font-weight: 500;
+}
+
+.testimonials h2 {
+  font-size: clamp(29px, 2.8vw, 42px);
+  font-weight: 700;
+}
+
+.testimonials h2 span {
+  font-size: clamp(28px, 2.65vw, 40px);
+}
+
+.enrollment h2 {
+  font-size: clamp(32px, 3.2vw, 48px);
+  font-weight: 500;
+  letter-spacing: 3px;
 }
 
 .about h2 {
@@ -878,7 +948,7 @@ footer p {
 .actions.small .btn {
   min-height: 40px;
   padding: 10px 18px;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .method-head {
@@ -1003,7 +1073,7 @@ footer p {
   border: 2px solid var(--gold);
   color: var(--bronze);
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 2px;
   align-self: flex-start;
@@ -1111,9 +1181,13 @@ cite span {
   display: block;
   color: #e8d8b6;
   font-family: var(--font-display);
-  font-size: 58px;
+  font-size: 34px;
   font-weight: 500;
   line-height: 0.7;
+}
+
+.parent-note span {
+  font-size: 36px;
 }
 
 .testimonial-grid strong,
@@ -1158,6 +1232,10 @@ cite span {
 
 .enrollment .actions {
   justify-content: center;
+}
+
+.enrollment .btn {
+  font-size: 10px;
 }
 
 .contact-line {
@@ -1249,7 +1327,7 @@ footer {
   display: grid;
   grid-template-columns: 1.4fr repeat(3, 1fr);
   gap: 46px;
-  background: #080808;
+  background: #111111;
   border-top: 1px solid var(--line);
 }
 
