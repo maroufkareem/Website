@@ -295,26 +295,17 @@ img {
   min-height: 983px;
   padding: 123px 6.35vw 25px;
   overflow: hidden;
+  /* hero.jpg is a pre-composed graphic — its dark left panel and fade are
+     baked in — so the reference shows the whole frame with `contain` and no
+     overlay. Cropping it with `cover` and layering a gradient on top (what we
+     did before) double-darkens an image that already carries its own
+     treatment. The 78px offset drops the image below the fixed header, where
+     the reference's in-flow header puts it. */
   background-image: var(--hero-image);
-  background-position: center 22%;
-  background-size: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  /* Strong behind the text column, fading to nearly clear by the time it
-     reaches the subject on the right — the photo should read bright and
-     crisp there, not washed out. */
-  background: linear-gradient(
-    90deg,
-    rgba(3, 5, 8, 0.97) 0%,
-    rgba(5, 7, 11, 0.92) 24%,
-    rgba(8, 8, 8, 0.6) 42%,
-    rgba(8, 8, 8, 0.22) 56%,
-    rgba(8, 8, 8, 0.06) 68%,
-    rgba(8, 8, 8, 0) 82%
-  );
+  background-position: 50% 78px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #080808;
 }
 
 /* Shown only on mobile (below 820px) as a standalone photo band above the
@@ -357,15 +348,16 @@ img {
   display: none;
 }
 
+/* Reference card: 280x103 at x1140-1420, top y610 (hero-relative 532). */
 .doctor-card-float {
   position: absolute;
   z-index: 4;
-  right: 6vw;
-  bottom: 22%;
-  max-width: 320px;
-  padding: 20px 26px;
+  right: 92px;
+  top: 610px;
+  width: 280px;
+  padding: 10px 20px;
   border: 1px solid var(--gold);
-  background: rgba(8, 8, 8, 0.82);
+  background: rgba(15, 15, 15, 0.84);
 }
 
 .doctor-name {
@@ -379,7 +371,7 @@ img {
 }
 
 .doctor-role {
-  margin: 5px 0 0;
+  margin: 9px 0 0;
   color: var(--cream);
   font-family: var(--font-display);
   font-size: 18px;
@@ -387,10 +379,14 @@ img {
   line-height: 1.35;
 }
 
-.doctor-role span,
 .site h1 span:nth-child(3),
 .site h2 span {
   color: var(--gold);
+  font-style: italic;
+}
+
+.doctor-role span {
+  color: var(--cream);
   font-style: italic;
 }
 
@@ -408,12 +404,15 @@ img {
 
 .site h1 {
   margin-bottom: 47px;
+  /* The reference stacks the four lines 67px apart (line-height 1.02) but
+     offsets the whole block 56px down inside the heading, with 22px below —
+     leading its flex container adds around the inline spans. Reproducing that
+     as padding keeps both the line spacing and the block height (347px). */
+  padding: 68px 0 10px;
   font-size: clamp(40px, 4.4vw, 66px);
   font-weight: 700;
   letter-spacing: -1px;
-  /* Reference sets a 4-line block at ~347px for a 66px face — the lines are
-     spaced much more openly than the 1.02 the spans themselves carry. */
-  line-height: 1.31;
+  line-height: 1.02;
   text-transform: none;
 }
 
@@ -446,19 +445,16 @@ img {
   gap: 17px;
 }
 
+/* The reference renders these as plain left-aligned blurbs — icon stacked
+   over the label, no panel, no borders — in three 160px columns. */
 .hero-badges {
   position: relative;
   z-index: 3;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  width: min(1080px, 100%);
-  margin: 90px auto 0;
-  border: 1px solid var(--line);
-  background: var(--line);
+  display: flex;
+  gap: 30px;
+  margin-top: 49px;
 }
 
-.hero-badges span,
 .program-card {
   background: rgba(15, 15, 15, 0.84);
   border: 1px solid rgba(201, 166, 90, 0.22);
@@ -477,22 +473,33 @@ img {
 }
 
 .hero-badges span {
-  padding: 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  gap: 30px;
+  width: 160px;
+  padding: 0;
+  background: none;
+  border: none;
   text-align: center;
   color: #b8964d;
   font-family: var(--font-ui);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 1px;
+  line-height: 1.3;
 }
 
 .hero-badges svg {
   flex-shrink: 0;
+  width: 26px;
+  height: 26px;
   color: var(--gold);
+}
+
+/* Hairline divider trailing each badge but the last. */
+.hero-badges span:not(:last-child) {
+  border-right: 2px solid rgba(201, 166, 90, 0.35);
 }
 
 .stats-grid {
@@ -1440,10 +1447,6 @@ footer a {
     background-image: none;
   }
 
-  .hero-overlay {
-    display: none;
-  }
-
   .hero-photo-mobile {
     display: block;
     position: relative;
@@ -1480,6 +1483,7 @@ footer a {
   }
 
   .site h1 {
+    padding: 0;
     font-size: 58px;
   }
 
@@ -1487,7 +1491,6 @@ footer a {
     font-size: 16px;
   }
 
-  .hero-badges,
   .stats-grid-inner,
   .program-grid,
   .about,
@@ -1499,7 +1502,14 @@ footer a {
   }
 
   .hero-badges {
-    margin-top: 54px;
+    flex-direction: column;
+    gap: 26px;
+    margin-top: 40px;
+  }
+
+  .hero-badges span {
+    gap: 14px;
+    width: auto;
   }
 
   /* Stacked, the portrait fills the column, so the offset accent square would

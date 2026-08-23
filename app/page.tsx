@@ -3,30 +3,28 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
 
+// The reference renders these as solid glyphs, not hairline outlines.
 const iconProps = {
-  width: 22,
-  height: 22,
+  width: 26,
+  height: 26,
   viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
+  fill: "currentColor",
 };
 
 const badgeIcons = [
   <svg key="cap" {...iconProps} aria-hidden="true">
-    <path d="M12 3 2 8l10 5 10-5-10-5Z" />
-    <path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5" />
+    <path d="M12 2.7 0.9 8.2l11.1 5.5 9.1-4.5v5.6a1.2 1.2 0 1 0 1.9 0V8.2L12 2.7Z" />
+    <path d="M5 12.1v3.6c0 1.9 3.1 3.4 7 3.4s7-1.5 7-3.4v-3.6l-7 3.5-7-3.5Z" />
   </svg>,
   <svg key="monitor" {...iconProps} aria-hidden="true">
-    <rect x="3" y="4" width="18" height="12" rx="1.5" />
-    <path d="M8 20h8M12 16v4" />
+    <path d="M2.6 3.5h18.8c.9 0 1.6.7 1.6 1.6v9.6c0 .9-.7 1.6-1.6 1.6h-8.5v2.6h3.4c.5 0 .9.4.9.9s-.4.9-.9.9H7.7c-.5 0-.9-.4-.9-.9s.4-.9.9-.9h3.4v-2.6H2.6c-.9 0-1.6-.7-1.6-1.6V5.1c0-.9.7-1.6 1.6-1.6Z" />
   </svg>,
   <svg key="badge" {...iconProps} aria-hidden="true">
-    <rect x="5" y="3" width="14" height="18" rx="2" />
-    <circle cx="12" cy="10" r="3" />
-    <path d="M9 21v-3.5a3 3 0 0 1 6 0V21" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M6.2 1.8h11.6c1.2 0 2.2 1 2.2 2.2v16c0 1.2-1 2.2-2.2 2.2H6.2c-1.2 0-2.2-1-2.2-2.2v-16c0-1.2 1-2.2 2.2-2.2Zm3.1 2.4a.8.8 0 0 0-.8.8c0 .5.4.8.8.8h5.4a.8.8 0 0 0 .8-.8.8.8 0 0 0-.8-.8H9.3ZM12 8.4a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4Zm-4.3 9.9c0-2 1.9-3.4 4.3-3.4s4.3 1.4 4.3 3.4v.6H7.7v-.6Z"
+    />
   </svg>,
 ];
 
@@ -66,7 +64,6 @@ export default async function Home() {
         id="home"
         style={{ "--hero-image": `url(${settings.heroImageUrl})` } as React.CSSProperties}
       >
-        <div className="hero-overlay" />
         <div className="hero-photo-mobile" />
 
         {/* Floats over the photo on desktop; hidden below 821px, where the
