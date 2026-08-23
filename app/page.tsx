@@ -114,8 +114,10 @@ export default async function Home() {
       </section>
 
       <section className="section about" id="about">
-        <div className="portrait-wrap">
-          <img src={settings.aboutPortraitUrl} alt="Dr. Kareem Wael Maarouf" />
+        <div className="portrait-frame">
+          <div className="portrait-wrap">
+            <img src={settings.aboutPortraitUrl} alt="Dr. Kareem Wael Maarouf" />
+          </div>
         </div>
         <div>
           <p className="eyebrow gold">{settings.aboutEyebrow}</p>

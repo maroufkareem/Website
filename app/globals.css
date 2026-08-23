@@ -536,10 +536,27 @@ footer {
   margin: 0 auto;
 }
 
+.portrait-frame {
+  position: relative;
+}
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -24px;
+  width: 140px;
+  height: 140px;
+  border: 1px solid var(--gold);
+  z-index: 0;
+}
+
 .portrait-wrap {
+  position: relative;
+  z-index: 1;
   padding: 18px;
   border: 1px solid var(--line);
-  background: rgba(252, 250, 246, 0.04);
+  background: var(--cream);
 }
 
 .portrait-wrap img {
