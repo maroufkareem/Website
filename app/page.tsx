@@ -102,13 +102,15 @@ export default async function Home() {
       </section>
 
       <section className="stats-grid">
-        {stats.map((stat) => (
-          <div className="stat" key={stat.number + stat.label}>
-            <strong>{stat.number}</strong>
-            <span>{stat.label}</span>
-            {stat.sub && <small>{stat.sub}</small>}
-          </div>
-        ))}
+        <div className="stats-grid-inner">
+          {stats.map((stat) => (
+            <div className="stat" key={stat.number + stat.label}>
+              <strong>{stat.number}</strong>
+              <span>{stat.label}</span>
+              {stat.sub && <small>{stat.sub}</small>}
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="section about" id="about">

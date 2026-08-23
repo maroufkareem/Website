@@ -464,11 +464,14 @@ img {
 
 .stats-grid {
   background: var(--cream);
+  padding: 88px 5vw;
+}
+
+.stats-grid-inner {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   max-width: 1180px;
   margin: 0 auto;
-  padding: 88px 5vw;
 }
 
 .stat {
@@ -1182,7 +1185,7 @@ footer a {
   }
 
   .hero-badges,
-  .stats-grid,
+  .stats-grid-inner,
   .program-grid,
   .about,
   .featured,
@@ -1199,6 +1202,9 @@ footer a {
   .stats-grid {
     margin-top: 0;
     padding: 24px 24px 0;
+  }
+
+  .stats-grid-inner {
     row-gap: 28px;
   }
 
