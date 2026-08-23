@@ -1,11 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Dancing+Script:wght@600;700&family=Open+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@100..900&family=Inter:opsz,wght@14..32,100..900&family=Dancing+Script:wght@600;700&display=swap");
 @import "tailwindcss";
 
+/* Type system mirrors drkareemmarouf.com:
+   Playfair Display for display headings, Montserrat for uppercase UI labels
+   (nav, eyebrows, buttons), Inter for body copy. */
 @theme {
-  --font-serif: "Cinzel", Georgia, serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
 :root {
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-ui: "Montserrat", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", Helvetica, Arial, sans-serif;
   --navy: #080808;
   --navy-2: #111111;
   --navy-3: #000000;
@@ -37,7 +43,7 @@ body {
   margin: 0;
   background: var(--navy);
   color: var(--cream);
-  font-family: "Open Sans", Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -108,7 +114,7 @@ img {
 
 .brand-mark .brand-mark-caption {
   margin-top: 2px;
-  font-family: "Cinzel", serif;
+  font-family: var(--font-display);
   font-size: 6px;
   font-weight: 700;
   letter-spacing: 1.4px;
@@ -116,9 +122,10 @@ img {
 
 .brand strong {
   display: block;
-  font-family: "Cinzel", serif;
-  font-size: 19px;
-  letter-spacing: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2.3px;
   line-height: 1.1;
 }
 
@@ -126,9 +133,10 @@ img {
   display: block;
   margin-top: 3px;
   color: var(--gold);
+  font-family: var(--font-ui);
   font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  font-weight: 500;
+  letter-spacing: 2.3px;
 }
 
 .site-header nav {
@@ -140,9 +148,11 @@ img {
 }
 
 .site-header nav a {
-  color: rgba(252, 250, 246, 0.88);
-  font-size: 13px;
-  font-weight: 700;
+  color: #bcbcbc;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: 1.7px;
 }
 
 .header-cta,
@@ -154,9 +164,10 @@ img {
   padding: 13px 24px;
   border: 2px solid var(--gold);
   color: var(--cream);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
   white-space: nowrap;
 }
@@ -164,6 +175,13 @@ img {
 .header-cta {
   background: transparent;
   color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.btn.secondary {
+  font-weight: 500;
 }
 
 .btn.primary {
@@ -320,9 +338,11 @@ img {
 .eyebrow {
   margin: 0 0 22px;
   color: var(--gold);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 2.7px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.4;
 }
 
 .gold {
@@ -347,20 +367,20 @@ img {
 .doctor-name {
   margin: 0;
   color: var(--gold);
-  font-family: "Cinzel", serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1.6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
   white-space: nowrap;
 }
 
 .doctor-role {
   margin: 5px 0 0;
-  color: rgba(252, 250, 246, 0.88);
-  font-family: "Cinzel", serif;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.25;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .doctor-role span,
@@ -377,15 +397,17 @@ img {
 .site h2,
 .site h3 {
   margin: 0;
-  font-family: "Cinzel", Georgia, serif;
+  font-family: var(--font-display);
   line-height: 1.04;
   letter-spacing: 0;
 }
 
 .site h1 {
   margin-bottom: 22px;
-  font-size: clamp(40px, 4.6vw, 74px);
-  font-weight: 800;
+  font-size: clamp(40px, 4.4vw, 66px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.02;
   text-transform: none;
 }
 
@@ -396,16 +418,19 @@ img {
 .hero-copy {
   max-width: 560px;
   margin: 0 0 16px;
-  color: rgba(252, 250, 246, 0.88);
-  font-size: 16px;
-  font-weight: 700;
+  color: #c3c2be;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 .quote {
   margin: 0 0 26px;
   color: var(--gold);
-  font-family: "Cinzel", serif;
-  font-size: 20px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
   font-style: italic;
 }
 
@@ -452,9 +477,11 @@ img {
   justify-content: center;
   gap: 10px;
   text-align: center;
-  color: var(--cream);
-  font-weight: 800;
-  letter-spacing: 1.4px;
+  color: #b8964d;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 .hero-badges svg {
@@ -489,19 +516,23 @@ img {
 }
 
 .stat strong {
-  color: var(--gold);
-  font-family: "Cinzel", serif;
-  font-size: 44px;
+  color: #b18a3c;
+  font-family: var(--font-display);
+  font-size: 54px;
+  font-weight: 600;
+  letter-spacing: 2px;
   line-height: 1;
 }
 
 .stat span,
 .stat small {
   display: block;
-  color: var(--ink);
+  color: #5c574f;
+  font-family: var(--font-ui);
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  line-height: 1.5;
 }
 
 .section,
@@ -569,8 +600,9 @@ footer {
 .site h2 {
   margin-bottom: 24px;
   color: var(--cream);
-  font-size: clamp(39px, 5.1vw, 72px);
+  font-size: clamp(34px, 3.5vw, 52px);
   font-weight: 700;
+  line-height: 1.1;
 }
 
 .about h2,
@@ -581,6 +613,11 @@ footer {
   color: var(--ink);
 }
 
+.about .eyebrow {
+  font-size: 13px;
+  letter-spacing: 4px;
+}
+
 .eyebrow-rule {
   display: block;
   width: 54px;
@@ -589,14 +626,12 @@ footer {
   background: var(--gold);
 }
 
-/* The reference sets this heading in a true sentence-case serif. Cinzel (the
-   site's display face) ships capitals only, so lowercase renders as small
-   caps — Playfair Display is used here instead to get real lowercase. */
 .about h2 {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(32px, 2.7vw, 41px);
+  font-family: var(--font-display);
+  font-size: clamp(32px, 2.9vw, 44px);
   font-weight: 700;
-  line-height: 1.22;
+  letter-spacing: -1px;
+  line-height: 1.02;
   margin-bottom: 34px;
 }
 
@@ -611,33 +646,57 @@ footer {
 .btn.about-cta {
   color: var(--gold);
   border-color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 
 .program-card p,
 .featured p,
 .enrollment p,
 footer p {
-  color: rgba(252, 250, 246, 0.78);
-  font-size: 16px;
-  font-weight: 700;
+  color: #a8a6a2;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 .about p:not(.eyebrow) {
   margin: 0 0 20px;
-  color: var(--ink-soft);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.75;
+  color: #5c574f;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
-.method-head p,
 .step p,
 .book-card p,
-.achievement-grid p,
-.testimonials p {
-  color: var(--ink-soft);
-  font-size: 16px;
-  font-weight: 700;
+.achievement-grid p {
+  color: #77736d;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.book-card p,
+.achievement-grid p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Testimonial quotes are set in italic Playfair on the reference. The eyebrow
+   is a Montserrat label, so it must not pick this up. */
+.testimonials p:not(.eyebrow) {
+  color: #252525;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.45;
 }
 
 .credentials,
@@ -661,8 +720,11 @@ footer p {
 
 .about .credentials li {
   margin-bottom: 18px;
-  font-weight: 600;
-  letter-spacing: 2.1px;
+  color: #4a4741;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
 }
 
 .about .credentials li::before {
@@ -676,10 +738,12 @@ footer p {
 
 .ticks li {
   margin-bottom: 12px;
-  color: rgba(252, 250, 246, 0.86);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 1.3px;
+  color: #a8a6a2;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1.6;
 }
 
 .ticks li::before {
@@ -687,11 +751,16 @@ footer p {
   color: var(--gold);
 }
 
-.programs,
-.books,
-.achievements {
+/* These carry their section background, so the width cap has to live on the
+   children — capping the section itself makes the background stop short and
+   lets the dark page show through at the edges. */
+.programs > *,
+.books > *,
+.achievements > *,
+.testimonials > * {
   max-width: 1180px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .center {
@@ -717,35 +786,75 @@ footer p {
 }
 
 .program-top span,
-.program-top strong,
 .book-card span,
 .date,
 .meta,
 .subhead {
   color: var(--gold);
+  font-family: var(--font-ui);
   font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.8px;
+  font-weight: 500;
+  letter-spacing: 3px;
 }
 
+.meta {
+  color: #777777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.subhead {
+  color: #b68f50;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+
+.book-card span {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+/* Price reads as display type on the reference, not a label. */
 .program-top strong {
-  font-size: 27px;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: normal;
 }
 
 .program-card h3 {
   margin-bottom: 16px;
   color: var(--cream);
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 700;
+  line-height: 1.15;
 }
 
-.step h3,
-.book-card h3,
+.step h3 {
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.book-card h3 {
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  line-height: 1.15;
+}
+
 .achievement-grid h3 {
   margin-bottom: 16px;
   color: var(--ink);
-  font-size: 30px;
+  font-size: 23px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .meta {
@@ -781,6 +890,10 @@ footer p {
 .method-head p {
   margin: 14px auto 0;
   width: min(420px, 100%);
+  color: #666666;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
   font-style: italic;
 }
 
@@ -813,10 +926,11 @@ footer p {
 .step span {
   display: block;
   margin-bottom: 18px;
-  color: var(--gold-soft);
-  font-family: "Cinzel", serif;
-  font-size: 34px;
-  font-weight: 800;
+  color: #ead9bb;
+  font-family: var(--font-ui);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .step span::after {
@@ -862,14 +976,15 @@ footer p {
 
 .book-card span {
   color: var(--gold);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
   margin-bottom: 8px;
 }
 
 .book-card h3 {
-  font-size: 22px;
+  font-size: 25px;
   margin-bottom: 12px;
 }
 
@@ -881,9 +996,10 @@ footer p {
   padding: 12px 20px;
   border: 2px solid var(--gold);
   color: var(--bronze);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
   align-self: flex-start;
 }
 
@@ -913,9 +1029,10 @@ footer p {
   border: 1px solid var(--gold);
   background: rgba(8, 8, 8, 0.85);
   color: var(--gold);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
 .achievement-grid {
@@ -942,10 +1059,11 @@ blockquote {
   max-width: 820px;
   margin: 0 auto;
   color: var(--cream);
-  font-family: "Cinzel", serif;
-  font-size: 31px;
+  font-family: var(--font-display);
+  font-size: 30px;
   font-weight: 700;
-  line-height: 1.5;
+  font-style: italic;
+  line-height: 1.45;
   text-align: center;
 }
 
@@ -953,24 +1071,24 @@ cite {
   display: block;
   margin-top: 25px;
   color: var(--gold);
-  font-family: "Open Sans", sans-serif;
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-size: 18px;
   font-style: normal;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 500;
+  letter-spacing: normal;
 }
 
 cite span {
   display: block;
   margin-top: 5px;
-  color: rgba(252, 250, 246, 0.66);
-  font-size: 11px;
+  color: #77736d;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
-.testimonials {
-  max-width: 1180px;
-  margin: 0 auto;
-}
+
 
 .testimonial-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -985,9 +1103,10 @@ cite span {
 .mark,
 .parent-note span {
   display: block;
-  color: var(--gold);
-  font-family: Georgia, serif;
+  color: #e8d8b6;
+  font-family: var(--font-display);
   font-size: 58px;
+  font-weight: 500;
   line-height: 0.7;
 }
 
@@ -996,8 +1115,10 @@ cite span {
   display: block;
   margin-top: 22px;
   color: var(--gold);
-  font-size: 12px;
-  letter-spacing: 1.4px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
 }
 
 .parent-note {
@@ -1128,23 +1249,28 @@ footer {
 
 footer h3 {
   margin-bottom: 18px;
-  color: var(--gold);
-  font-size: 28px;
+  color: var(--cream);
+  font-size: 22px;
+  font-weight: 700;
 }
 
 footer h4 {
   margin: 0 0 18px;
   color: var(--gold);
-  font-size: 12px;
-  font-weight: 800;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: 2px;
 }
 
 footer a {
   display: block;
   margin-bottom: 9px;
-  color: rgba(252, 250, 246, 0.75);
-  font-weight: 700;
+  color: #8a8a8a;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 2.1;
 }
 
 .footer-bottom {
@@ -1154,8 +1280,10 @@ footer a {
   gap: 20px;
   padding-top: 28px;
   border-top: 1px solid rgba(201, 166, 90, 0.25);
-  color: rgba(252, 250, 246, 0.72);
+  color: #8a8a8a;
+  font-family: var(--font-body);
   font-size: 13px;
+  font-weight: 500;
 }
 
 @media (max-width: 1120px) {
@@ -1194,12 +1322,16 @@ footer a {
     min-width: 0;
   }
 
+  /* The reference's 2.3px tracking is a desktop value; at phone widths it
+     wraps the wordmark, so tighten it here. */
   .brand strong {
     font-size: 17px;
+    letter-spacing: 0.6px;
   }
 
   .brand small {
     font-size: 8px;
+    letter-spacing: 1.4px;
   }
 
   .hero {
@@ -1339,9 +1471,12 @@ footer a {
     display: block;
   }
 
+  /* minmax(0, …) rather than a bare 1fr: the auto minimum of a bare 1fr is
+     the card's min-content width, which the book title can push past the
+     viewport. */
   .step-grid,
   .book-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .featured-images img {
