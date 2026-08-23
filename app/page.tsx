@@ -1,5 +1,4 @@
 import { getSiteData } from "@/app/lib/site-data";
-import ContactForm from "@/app/components/ContactForm";
 import PageViewBeacon from "@/app/components/PageViewBeacon";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
@@ -228,8 +227,9 @@ export default async function Home() {
 
       <section className="section quote-band">
         <blockquote>
-          &quot;Biology comes to life when every detail connects,<br /> every concept finds meaning, and understanding turns knowledge into mastery.&quot;
-          <cite>Dr. Kareem Wael Maarouf <span>FOUNDER - THE MAROUF METHOD</span></cite>
+          <span className="mark">”</span>
+          Biology comes to life when every detail connects,<br /> every concept finds meaning, and understanding turns knowledge into mastery.
+          <cite>Dr. Kareem Wael Maarouf <span>FOUNDER · THE MAROUF METHOD</span></cite>
         </blockquote>
       </section>
 
@@ -239,9 +239,9 @@ export default async function Home() {
         <div className="testimonial-grid">
           {testimonials.map((testimonial) => (
             <article key={testimonial.author + testimonial.body.slice(0, 10)}>
-              <span className="mark">&quot;</span>
+              <span className="mark">”</span>
               <p>{testimonial.body}</p>
-              <strong>- {testimonial.author}</strong>
+              <strong>— {testimonial.author}</strong>
             </article>
           ))}
         </div>
@@ -249,22 +249,21 @@ export default async function Home() {
           <a className="btn secondary" href="/testimonials">READ MORE STUDENT STORIES</a>
         </div>
         <div className="parent-note">
-          <span>&quot;</span>
+          <span>”</span>
           <p>Thank you for your effort with the students and for making them love the subject.</p>
-          <strong>- PARENT FEEDBACK -</strong>
+          <strong>— PARENT FEEDBACK —</strong>
         </div>
       </section>
 
       <section className="enrollment" id="contact">
         <p className="eyebrow gold center">ENROLLMENT</p>
         <h2>Begin Your <span>Academic Journey</span></h2>
-        <p>Reserve your place in The Marouf Method&apos;s Biology or Psychology program and build the understanding, confidence, and exam skills needed for lasting success.</p>
+        <p>Reserve your place in The Marouf Method’s Biology or Psychology program and build the understanding, confidence, and exam skills needed for lasting success.</p>
         <div className="actions">
           <a className="btn primary" href={`mailto:${contactEmail}`}>REGISTER NOW</a>
-          <a className="btn whatsapp" href={whatsappHref}>CHAT ON WHATSAPP</a>
+          <a className="btn whatsapp" href={whatsappHref}>● CHAT ON WHATSAPP</a>
         </div>
-        <p className="contact-line">- {contactPhone}    - {contactEmail}</p>
-        <ContactForm programOptions={programs.map((program) => program.title)} />
+        <p className="contact-line">— {contactPhone}    — {contactEmail}</p>
       </section>
 
       <SiteFooter
