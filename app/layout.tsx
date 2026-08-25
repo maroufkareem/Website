@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat, Inter, Dancing_Script } from "next/font/google";
+import ScrollAnimations from "@/app/components/ScrollAnimations";
 import "./globals.css";
 
 /* Loaded through next/font rather than an @import in globals.css: the
@@ -53,7 +54,10 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${montserrat.variable} ${inter.variable} ${dancingScript.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <ScrollAnimations />
+        {children}
+      </body>
     </html>
   );
 }
