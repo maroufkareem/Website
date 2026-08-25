@@ -1016,7 +1016,7 @@ footer p {
 
 .method-head p {
   margin: 14px auto 0;
-  width: min(420px, 100%);
+  width: auto;
   color: #666666;
   font-family: var(--font-display);
   font-size: 19px;
@@ -1034,6 +1034,7 @@ footer p {
 
 .step-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px;
   max-width: 1180px;
   margin: 0 auto;
   padding-top: 44px;
@@ -1041,7 +1042,7 @@ footer p {
 }
 
 .step {
-  padding: 0 28px;
+  padding: 55px 35px 45px;
   border-left: 1px solid var(--line-light);
 }
 
@@ -1640,6 +1641,38 @@ footer a {
   .step-grid,
   .book-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The reference's desktop book card is a fixed 185px cover + 97px gutter +
+     207px text column — 525px, wider than a phone. Stack it instead. */
+  .book-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: 0;
+  }
+
+  .book-card img {
+    width: 100%;
+    max-width: 185px;
+  }
+
+  .book-card > div {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .program-card {
+    min-height: 0;
+    padding: 26px 22px;
+  }
+
+  .step {
+    padding: 32px 0 0;
+  }
+
+  .achievement-grid article {
+    min-height: 0;
   }
 
   .featured-images img {
