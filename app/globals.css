@@ -160,8 +160,8 @@ img {
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 11px 18px;
-  border: 2px solid var(--gold);
+  padding: 12px 15px;
+  border: 1px solid var(--gold);
   color: var(--cream);
   font-family: var(--font-ui);
   font-size: 13px;
@@ -455,8 +455,8 @@ img {
 }
 
 .program-card {
-  background: rgba(15, 15, 15, 0.84);
-  border: 1px solid rgba(201, 166, 90, 0.22);
+  background: #1b1b1b;
+  border: 1px solid rgba(201, 166, 90, 0.35);
 }
 
 .book-card,
@@ -877,20 +877,34 @@ footer p {
   padding: 20px 30px;
 }
 
-.program-label {
+/* Scoped to beat `.program-card p`, which otherwise wins on specificity and
+   renders this at body size. */
+.program-card .program-label {
   margin: 0 0 12px;
   color: var(--gold);
   font-family: var(--font-ui);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 3px;
+  text-align: center;
 }
 
-.program-daterow {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 18px;
+.program-price {
+  display: block;
+  margin: 0 0 18px;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+/* Hairline between the schedule lines and the description. */
+.program-rule {
+  display: block;
+  height: 1px;
+  margin: 35px 0 34px;
+  background: rgba(201, 166, 90, 0.3);
 }
 
 /* `.program-card p` carries two classes, so it was beating `.meta` and
@@ -993,7 +1007,10 @@ footer p {
 }
 
 .actions.small {
-  margin-top: 28px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 31px;
+  margin-top: 37px;
 }
 
 .actions.small .btn {

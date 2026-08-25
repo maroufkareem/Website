@@ -26,15 +26,24 @@ export default async function CoursesPage() {
         <div className="program-grid">
           {programs.map((program) => (
             <article className="program-card" key={program.title}>
-              {/* Reference order: title, then label, then meta, with the
-                  price sitting beside the date rather than above the title. */}
-              <h3>{program.title}</h3>
-              <p className="program-label">{program.label}</p>
+              {/* The reference orders its two cards differently: the priced
+                  card leads with the label, the unpriced one leads with the
+                  title. Mirrored here so both match. */}
+              {program.price ? (
+                <>
+                  <p className="program-label">{program.label}</p>
+                  <h3>{program.title}</h3>
+                  <strong className="program-price">{program.price}</strong>
+                </>
+              ) : (
+                <>
+                  <h3>{program.title}</h3>
+                  <p className="program-label">{program.label}</p>
+                </>
+              )}
               <p className="meta">{program.meta}</p>
-              <div className="program-daterow">
-                <p className="date">{program.date}</p>
-                {program.price && <strong>{program.price}</strong>}
-              </div>
+              <p className="date">{program.date}</p>
+              <span className="program-rule" />
               <p>{program.body}</p>
               <div className="actions small">
                 <a className="btn primary" href="/contact">RESERVE YOUR PLACE</a>
