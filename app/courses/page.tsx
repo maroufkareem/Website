@@ -28,7 +28,9 @@ export default async function CoursesPage() {
             <article className="program-card" key={program.title}>
               <p className="program-label">{program.label}</p>
               <h3>{program.title}</h3>
-              {program.price && <strong className="program-price">{program.price}</strong>}
+              {/* Rendered even when empty so cards with and without a price
+                  keep the same rhythm and stay aligned across the row. */}
+              <strong className="program-price">{program.price || "\u00a0"}</strong>
               <p className="meta">{program.meta}</p>
               <p className="date">{program.date}</p>
               <span className="program-rule" />
