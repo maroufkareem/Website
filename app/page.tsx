@@ -211,7 +211,7 @@ export default async function Home() {
 
       <section className="section achievements" id="achievements">
         <p className="eyebrow gold center">CREDENTIALS & ACHIEVEMENTS</p>
-        <h2 className="center">Academic Excellence <span>Behind Every Lesson</span></h2>
+        <h2 className="center">Academic Excellence<br /><span>Behind Every Lesson</span></h2>
         <div className="achievement-grid">
           {achievements.map((achievement) => (
             <article key={achievement.title}>

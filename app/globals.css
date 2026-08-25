@@ -468,7 +468,7 @@ img {
 }
 
 .achievement-grid article {
-  background: var(--blush);
+  background: #f6efe6;
 }
 
 .hero-badges span {
@@ -573,6 +573,12 @@ footer {
 .enrollment            { padding-top: 48px; padding-bottom: 42px; }
 footer                 { padding-top: 60px; padding-bottom: 24px; }
 .section.quote-band    { padding-top: 65px; padding-bottom: 65px; background: #1d1d1d; }
+
+.quote-band .mark {
+  font-size: 58px;
+  line-height: 1;
+  margin-bottom: 49px;
+}
 
 .section {
   background: var(--navy);
@@ -1132,13 +1138,15 @@ footer p {
 
 .achievement-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 5.5%;
   margin-top: 46px;
-  padding: 32px;
+  padding: 28px 32px;
   border: 1px solid var(--line-light);
 }
 
 .achievement-grid article {
-  padding: 34px;
+  min-height: 224px;
+  padding: 28px 32px;
 }
 
 .achievement-grid h3::before {
@@ -1164,10 +1172,13 @@ blockquote {
 
 cite {
   display: block;
-  margin-top: 25px;
+  /* The reference leaves a deliberate gap between the quote and its
+     attribution. */
+  margin-top: 130px;
   color: var(--gold);
   font-family: var(--font-display);
   font-size: 18px;
+  line-height: 23.8px;
   font-style: normal;
   font-weight: 500;
   letter-spacing: normal;
@@ -1175,10 +1186,11 @@ cite {
 
 cite span {
   display: block;
-  margin-top: 5px;
+  margin-top: 0;
   color: #77736d;
   font-family: var(--font-ui);
   font-size: 10px;
+  line-height: 23.8px;
   font-weight: 500;
   letter-spacing: 2px;
 }
