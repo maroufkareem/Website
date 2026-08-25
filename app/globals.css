@@ -1,17 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@100..900&family=Inter:opsz,wght@14..32,100..900&family=Dancing+Script:wght@600;700&display=swap");
 @import "tailwindcss";
 
 /* Type system mirrors drkareemmarouf.com:
    Playfair Display for display headings, Montserrat for uppercase UI labels
    (nav, eyebrows, buttons), Inter for body copy. */
 @theme {
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
 }
 
 :root {
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-ui: "Montserrat", Helvetica, Arial, sans-serif;
-  --font-body: "Inter", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-ui: var(--font-montserrat), Helvetica, Arial, sans-serif;
+  --font-body: var(--font-inter), Helvetica, Arial, sans-serif;
   --navy: #080808;
   --navy-2: #111111;
   --navy-3: #000000;
@@ -107,7 +106,7 @@ img {
 }
 
 .brand-mark .brand-mark-script {
-  font-family: "Dancing Script", cursive;
+  font-family: var(--font-dancing), cursive;
   font-size: 17px;
   font-weight: 700;
 }
