@@ -868,12 +868,41 @@ footer p {
 .program-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
+  gap: 40px 5.5%;
   margin-top: 48px;
 }
 
 .program-card {
-  padding: 42px;
+  min-height: 544px;
+  padding: 20px 30px;
+}
+
+.program-label {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.program-daterow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* `.program-card p` carries two classes, so it was beating `.meta` and
+   `.date` and rendering them at body size instead of 10px. */
+.program-card .meta,
+.program-card .date {
+  color: #777777;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  line-height: 18px;
 }
 
 .program-top {
@@ -968,8 +997,8 @@ footer p {
 }
 
 .actions.small .btn {
-  min-height: 40px;
-  padding: 10px 18px;
+  min-height: 50px;
+  padding: 14px 28px;
   font-size: 12px;
 }
 

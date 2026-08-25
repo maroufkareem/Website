@@ -26,13 +26,15 @@ export default async function CoursesPage() {
         <div className="program-grid">
           {programs.map((program) => (
             <article className="program-card" key={program.title}>
-              <div className="program-top">
-                <span>{program.label}</span>
+              {/* Reference order: title, then label, then meta, with the
+                  price sitting beside the date rather than above the title. */}
+              <h3>{program.title}</h3>
+              <p className="program-label">{program.label}</p>
+              <p className="meta">{program.meta}</p>
+              <div className="program-daterow">
+                <p className="date">{program.date}</p>
                 {program.price && <strong>{program.price}</strong>}
               </div>
-              <h3>{program.title}</h3>
-              <p className="meta">{program.meta}</p>
-              <p className="date">{program.date}</p>
               <p>{program.body}</p>
               <div className="actions small">
                 <a className="btn primary" href="/contact">RESERVE YOUR PLACE</a>
