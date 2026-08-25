@@ -673,6 +673,10 @@ footer                 { padding-top: 60px; padding-bottom: 24px; }
 }
 
 .books h2 {
+  /* Reference caps this at 950px so it breaks over two lines. */
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: clamp(30px, 3.1vw, 46px);
   font-weight: 700;
   letter-spacing: 4px;
@@ -767,7 +771,13 @@ footer p {
 .achievement-grid p {
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.55;
+}
+
+/* The reference tracks book copy at 1.5px, which is what makes it wrap to
+   six lines in the 207px column rather than five. */
+.book-card p {
+  letter-spacing: 1.5px;
 }
 
 /* Testimonial quotes are set in italic Playfair on the reference. The eyebrow
@@ -1037,15 +1047,17 @@ footer p {
 .book-card {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 24px;
-  padding: 26px;
+  align-items: center;
+  gap: 97px;
+  min-height: 378px;
+  padding: 18px;
+  background: var(--cream);
 }
 
 .book-card img {
-  width: 130px;
+  width: 185px;
   flex-shrink: 0;
-  aspect-ratio: 0.72;
+  aspect-ratio: 185 / 239;
   object-fit: cover;
   background: rgba(26, 23, 18, 0.06);
 }
@@ -1053,6 +1065,7 @@ footer p {
 .book-card > div {
   display: flex;
   flex-direction: column;
+  flex: 0 0 207px;
   min-width: 0;
 }
 
@@ -1075,8 +1088,8 @@ footer p {
   align-items: center;
   justify-content: center;
   margin-top: 18px;
-  padding: 12px 20px;
-  border: 2px solid var(--gold);
+  padding: 4px 13px;
+  border: 1px solid var(--gold);
   color: var(--bronze);
   font-family: var(--font-ui);
   font-size: 13px;
