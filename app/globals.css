@@ -347,12 +347,13 @@ img {
   display: none;
 }
 
-/* Reference card: 280x103 at x1140-1420, top y610 (hero-relative 532). */
+/* The reference pins this at top 610 / right 92; nudged down and left from
+   there by request. */
 .doctor-card-float {
   position: absolute;
   z-index: 4;
-  right: 92px;
-  top: 610px;
+  right: 172px;
+  top: 662px;
   width: 280px;
   padding: 10px 20px;
   border: 1px solid var(--gold);
