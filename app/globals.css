@@ -8,6 +8,7 @@
 }
 
 :root {
+  --header-h: 79px;
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-ui: var(--font-montserrat), Helvetica, Arial, sans-serif;
   --font-body: var(--font-inter), Helvetica, Arial, sans-serif;
@@ -35,7 +36,14 @@ html {
 }
 
 section[id] {
-  scroll-margin-top: 110px;
+  scroll-margin-top: calc(var(--header-h) + 32px);
+}
+
+/* The header is fixed, so a page that opens with a plain section (every page
+   except the home page, which opens with the hero) has to clear it — the
+   per-section padding alone is far smaller than the header. */
+.site > section:first-of-type:not(.hero) {
+  padding-top: calc(var(--header-h) + 40px);
 }
 
 body {
