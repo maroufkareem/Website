@@ -5,6 +5,7 @@ import {
   adminUsers,
   books,
   enquiries,
+  bookReservations,
   navItems,
   pageViews,
   programs,
@@ -349,6 +350,70 @@ export async function countPublishedBooks(): Promise<number> {
     .select({ count: sql<number>`count(*)::int` })
     .from(books)
     .where(eq(books.published, true));
+  return rows[0]?.count ?? 0;
+}
+
+// ---------- book reservations ----------
+
+export type BookReservation = typeof bookReservations.$inferSelect;
+export type ReservationStatus = "new" | "confirmed" | "collected" | "cancelled";
+
+export async function createBookReservation(values: {
+  bookId: number | null;
+  bookTitle: string;
+  name: string;
+  email: string;
+  phone: string;
+  note: string;
+}): Promise<BookReservation> {
+  const db = getDb();
+  const rows = await db
+    .insert(bookReservations)
+    .values({
+      bookId: values.bookId,
+      bookTitle: values.bookTitle,
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      note: values.note,
+    })
+    .returning();
+  return rows[0];
+}
+
+export async function listBookReservations(): Promise<BookReservation[]> {
+  const db = getDb();
+  return db.select().from(bookReservations).orderBy(desc(bookReservations.createdAt));
+}
+
+export async function getRecentBookReservations(limit = 5): Promise<BookReservation[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(bookReservations)
+    .orderBy(desc(bookReservations.createdAt))
+    .limit(limit);
+}
+
+export async function updateBookReservationStatus(
+  id: number,
+  status: ReservationStatus
+): Promise<void> {
+  const db = getDb();
+  await db.update(bookReservations).set({ status }).where(eq(bookReservations.id, id));
+}
+
+export async function deleteBookReservation(id: number): Promise<void> {
+  const db = getDb();
+  await db.delete(bookReservations).where(eq(bookReservations.id, id));
+}
+
+export async function countNewBookReservations(): Promise<number> {
+  const db = getDb();
+  const rows = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(bookReservations)
+    .where(eq(bookReservations.status, "new"));
   return rows[0]?.count ?? 0;
 }
 

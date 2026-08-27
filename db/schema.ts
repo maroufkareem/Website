@@ -113,6 +113,21 @@ export const navItems = pgTable("nav_items", {
   sortOrder: integer("sort_order").notNull().default(0),
 });
 
+export const bookReservations = pgTable("book_reservations", {
+  id: serial("id").primaryKey(),
+  // Title is copied rather than joined so a reservation still reads correctly
+  // if the book is later renamed or removed from the catalogue.
+  bookId: integer("book_id"),
+  bookTitle: text("book_title").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull().default(""),
+  note: text("note").notNull().default(""),
+  // 'new' | 'confirmed' | 'collected' | 'cancelled'
+  status: text("status").notNull().default("new"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const enquiries = pgTable("enquiries", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),

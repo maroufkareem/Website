@@ -186,7 +186,7 @@ export default async function Home() {
                 <span>{book.label}</span>
                 <h3>{book.title}</h3>
                 <p>{book.body}</p>
-                <a className="order" href="/contact">ORDER NOW</a>
+                <a className="order" href={`/reserve?book=${encodeURIComponent(book.title)}`}>RESERVE NOW</a>
               </div>
             </article>
           ))}
