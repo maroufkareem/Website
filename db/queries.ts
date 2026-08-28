@@ -6,6 +6,9 @@ import {
   books,
   enquiries,
   bookReservations,
+  quizzes,
+  quizQuestions,
+  quizAttempts,
   navItems,
   pageViews,
   programs,
@@ -415,6 +418,175 @@ export async function countNewBookReservations(): Promise<number> {
     .from(bookReservations)
     .where(eq(bookReservations.status, "new"));
   return rows[0]?.count ?? 0;
+}
+
+// ---------- quizzes ----------
+
+export type Quiz = typeof quizzes.$inferSelect;
+export type QuizQuestion = typeof quizQuestions.$inferSelect;
+export type QuizAttempt = typeof quizAttempts.$inferSelect;
+
+/** Question as sent to the browser — correctIndex deliberately omitted. */
+export type PublicQuizQuestion = {
+  id: number;
+  prompt: string;
+  type: string;
+  options: string[];
+};
+
+export async function listQuizzes(onlyPublished = false): Promise<Quiz[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(quizzes)
+    .where(onlyPublished ? eq(quizzes.published, true) : undefined)
+    .orderBy(quizzes.sortOrder, desc(quizzes.createdAt));
+}
+
+export async function getQuizById(id: number): Promise<Quiz | null> {
+  const db = getDb();
+  const rows = await db.select().from(quizzes).where(eq(quizzes.id, id)).limit(1);
+  return rows[0] ?? null;
+}
+
+export async function getQuizBySlug(slug: string): Promise<Quiz | null> {
+  const db = getDb();
+  const rows = await db.select().from(quizzes).where(eq(quizzes.slug, slug)).limit(1);
+  return rows[0] ?? null;
+}
+
+export async function createQuiz(values: {
+  slug: string;
+  title: string;
+  subject: string;
+  description: string;
+  passMark: number;
+  published: boolean;
+}): Promise<Quiz> {
+  const db = getDb();
+  const [row] = await db.insert(quizzes).values(values).returning();
+  return row;
+}
+
+export async function updateQuiz(
+  id: number,
+  values: Partial<{
+    slug: string;
+    title: string;
+    subject: string;
+    description: string;
+    passMark: number;
+    published: boolean;
+    sortOrder: number;
+  }>
+): Promise<void> {
+  const db = getDb();
+  await db.update(quizzes).set(values).where(eq(quizzes.id, id));
+}
+
+export async function deleteQuiz(id: number): Promise<void> {
+  const db = getDb();
+  // No FK cascade in the schema, so clear children explicitly.
+  await db.delete(quizQuestions).where(eq(quizQuestions.quizId, id));
+  await db.delete(quizAttempts).where(eq(quizAttempts.quizId, id));
+  await db.delete(quizzes).where(eq(quizzes.id, id));
+}
+
+export async function listQuizQuestions(quizId: number): Promise<QuizQuestion[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(quizQuestions)
+    .where(eq(quizQuestions.quizId, quizId))
+    .orderBy(quizQuestions.sortOrder, quizQuestions.id);
+}
+
+/** Strips the answer key before anything reaches the browser. */
+export function toPublicQuestions(rows: QuizQuestion[]): PublicQuizQuestion[] {
+  return rows.map((q) => ({
+    id: q.id,
+    prompt: q.prompt,
+    type: q.type,
+    options: q.options,
+  }));
+}
+
+export async function replaceQuizQuestions(
+  quizId: number,
+  questions: {
+    prompt: string;
+    type: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+  }[]
+): Promise<void> {
+  const db = getDb();
+  await db.delete(quizQuestions).where(eq(quizQuestions.quizId, quizId));
+  if (!questions.length) return;
+  await db.insert(quizQuestions).values(
+    questions.map((q, index) => ({
+      quizId,
+      prompt: q.prompt,
+      type: q.type,
+      options: q.options,
+      correctIndex: q.correctIndex,
+      explanation: q.explanation,
+      sortOrder: index,
+    }))
+  );
+}
+
+export async function createQuizAttempt(values: {
+  quizId: number;
+  quizTitle: string;
+  studentName: string;
+  studentEmail: string;
+  score: number;
+  total: number;
+  answers: number[];
+}): Promise<QuizAttempt> {
+  const db = getDb();
+  const [row] = await db.insert(quizAttempts).values(values).returning();
+  return row;
+}
+
+export async function listQuizAttempts(quizId?: number): Promise<QuizAttempt[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(quizAttempts)
+    .where(quizId ? eq(quizAttempts.quizId, quizId) : undefined)
+    .orderBy(desc(quizAttempts.createdAt));
+}
+
+export async function deleteQuizAttempt(id: number): Promise<void> {
+  const db = getDb();
+  await db.delete(quizAttempts).where(eq(quizAttempts.id, id));
+}
+
+export async function countQuizAttempts(): Promise<number> {
+  const db = getDb();
+  const rows = await db.select({ count: sql<number>`count(*)::int` }).from(quizAttempts);
+  return rows[0]?.count ?? 0;
+}
+
+export async function countQuestionsByQuiz(): Promise<Record<number, number>> {
+  const db = getDb();
+  const rows = await db
+    .select({ quizId: quizQuestions.quizId, count: sql<number>`count(*)::int` })
+    .from(quizQuestions)
+    .groupBy(quizQuestions.quizId);
+  return Object.fromEntries(rows.map((r) => [r.quizId, r.count]));
+}
+
+export async function countAttemptsByQuiz(): Promise<Record<number, number>> {
+  const db = getDb();
+  const rows = await db
+    .select({ quizId: quizAttempts.quizId, count: sql<number>`count(*)::int` })
+    .from(quizAttempts)
+    .groupBy(quizAttempts.quizId);
+  return Object.fromEntries(rows.map((r) => [r.quizId, r.count]));
 }
 
 export type { SiteStat, MethodStep, SocialLinks };

@@ -113,6 +113,50 @@ export const navItems = pgTable("nav_items", {
   sortOrder: integer("sort_order").notNull().default(0),
 });
 
+export type QuizOption = string;
+export type QuizQuestionType = "multiple_choice" | "true_false";
+
+export const quizzes = pgTable("quizzes", {
+  id: serial("id").primaryKey(),
+  // Used in the public URL: /quizzes/<slug>
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  subject: text("subject").notNull().default(""),
+  description: text("description").notNull().default(""),
+  // Percentage a student needs to pass, 0-100.
+  passMark: integer("pass_mark").notNull().default(50),
+  published: boolean("published").notNull().default(false),
+  sortOrder: integer("sort_order").notNull().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const quizQuestions = pgTable("quiz_questions", {
+  id: serial("id").primaryKey(),
+  quizId: integer("quiz_id").notNull(),
+  prompt: text("prompt").notNull(),
+  type: text("type").notNull().default("multiple_choice"),
+  // For true/false this is ["True", "False"].
+  options: jsonb("options").$type<QuizOption[]>().notNull().default([]),
+  // Index into `options`. Never sent to the browser — grading is server-side.
+  correctIndex: integer("correct_index").notNull().default(0),
+  explanation: text("explanation").notNull().default(""),
+  sortOrder: integer("sort_order").notNull().default(0),
+});
+
+export const quizAttempts = pgTable("quiz_attempts", {
+  id: serial("id").primaryKey(),
+  quizId: integer("quiz_id").notNull(),
+  // Copied so an attempt still reads correctly if the quiz is renamed.
+  quizTitle: text("quiz_title").notNull().default(""),
+  studentName: text("student_name").notNull(),
+  studentEmail: text("student_email").notNull(),
+  score: integer("score").notNull().default(0),
+  total: integer("total").notNull().default(0),
+  // Chosen option index per question, in question order; -1 = unanswered.
+  answers: jsonb("answers").$type<number[]>().notNull().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const bookReservations = pgTable("book_reservations", {
   id: serial("id").primaryKey(),
   // Title is copied rather than joined so a reservation still reads correctly
