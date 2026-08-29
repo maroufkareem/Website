@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getSiteData } from "@/app/lib/site-data";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
@@ -27,7 +28,7 @@ export default async function BooksPage() {
         <div className="book-grid">
           {books.map((book) => (
             <article className="book-card" key={book.title}>
-              <img src={book.imageUrl} alt={book.title} />
+              <Image src={book.imageUrl} alt={book.title} width={370} height={478} sizes="185px" />
               <div>
                 <span>{book.label}</span>
                 <h3>{book.title}</h3>
@@ -42,7 +43,13 @@ export default async function BooksPage() {
       <section className="featured">
         <div className="featured-images">
           <p className="pill">NOW AVAILABLE</p>
-          <img src={settings.featuredImage1Url} alt="Biology guide preview" />
+          <Image
+            src={settings.featuredImage1Url}
+            alt="Biology guide preview"
+            width={1140}
+            height={1120}
+            sizes="(max-width: 820px) 100vw, 570px"
+          />
         </div>
         <div>
           <p className="eyebrow gold">{settings.featuredEyebrow}</p>

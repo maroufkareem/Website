@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getSiteData } from "@/app/lib/site-data";
 import PageViewBeacon from "@/app/components/PageViewBeacon";
 import SiteHeader from "@/app/components/SiteHeader";
@@ -114,7 +115,13 @@ export default async function Home() {
         <div className="about">
         <div className="portrait-frame">
           <div className="portrait-wrap">
-            <img src={settings.aboutPortraitUrl} alt="Dr. Kareem Wael Maarouf" />
+            <Image
+              src={settings.aboutPortraitUrl}
+              alt="Dr. Kareem Wael Maarouf"
+              width={1100}
+              height={1375}
+              sizes="(max-width: 820px) 100vw, 540px"
+            />
           </div>
         </div>
         <div>
@@ -181,7 +188,7 @@ export default async function Home() {
         <div className="book-grid">
           {books.map((book) => (
             <article className="book-card" key={book.title}>
-              <img src={book.imageUrl} alt={book.title} />
+              <Image src={book.imageUrl} alt={book.title} width={370} height={478} sizes="185px" />
               <div>
                 <span>{book.label}</span>
                 <h3>{book.title}</h3>
@@ -196,7 +203,13 @@ export default async function Home() {
       <section className="featured">
         <div className="featured-images">
           <p className="pill">NOW AVAILABLE</p>
-          <img src={settings.featuredImage1Url} alt="Biology guide preview" />
+          <Image
+            src={settings.featuredImage1Url}
+            alt="Biology guide preview"
+            width={1140}
+            height={1120}
+            sizes="(max-width: 820px) 100vw, 570px"
+          />
         </div>
         <div>
           <p className="eyebrow gold">{settings.featuredEyebrow}</p>

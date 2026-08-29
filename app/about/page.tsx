@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getSiteData } from "@/app/lib/site-data";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
@@ -24,7 +25,14 @@ export default async function AboutPage() {
         <div className="about">
         <div className="portrait-frame">
           <div className="portrait-wrap">
-            <img src={settings.aboutPortraitUrl} alt="Dr. Kareem Wael Maarouf" />
+            <Image
+              src={settings.aboutPortraitUrl}
+              alt="Dr. Kareem Wael Maarouf"
+              width={1100}
+              height={1375}
+              sizes="(max-width: 820px) 100vw, 540px"
+              priority
+            />
           </div>
         </div>
         <div>
