@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type NavItem = { href: string; label: string };
@@ -27,6 +28,13 @@ export default function SiteFooter({
   return (
     <footer>
       <div>
+        <Image
+          className="footer-logo"
+          src="/marouf-assets/logo.png"
+          alt=""
+          width={128}
+          height={128}
+        />
         <h3>The Marouf Method</h3>
         <p>{footerBlurb}</p>
       </div>

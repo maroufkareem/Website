@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getSiteData } from "@/app/lib/site-data";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
@@ -26,17 +27,32 @@ export default async function TestimonialsPage() {
         <div className="testimonial-grid">
           {testimonials.map((testimonial) => (
             <article key={testimonial.author + testimonial.body.slice(0, 10)}>
-              <span className="mark">&quot;</span>
+              <span className="mark">”</span>
               <p>{testimonial.body}</p>
-              <strong>- {testimonial.author}</strong>
+              <strong>— {testimonial.author}</strong>
             </article>
           ))}
         </div>
         <div className="parent-note">
-          <span>&quot;</span>
+          <span>”</span>
           <p>Thank you for your effort with the students and for making them love the subject.</p>
-          <strong>- PARENT FEEDBACK -</strong>
+          <strong>— PARENT FEEDBACK —</strong>
         </div>
+      </section>
+
+      <section className="section messages-section">
+        <p className="eyebrow gold center">REAL MESSAGES</p>
+        <h2 className="center">Straight From <span>The Students</span></h2>
+        <p className="subhead">UNEDITED MESSAGES FROM STUDENTS AND PARENTS</p>
+        <figure className="messages-shot">
+          <Image
+            src="/marouf-assets/student-messages.jpg"
+            alt="Screenshots of messages from students and parents about Dr. Kareem's teaching"
+            width={1400}
+            height={933}
+            sizes="(max-width: 820px) 100vw, 1100px"
+          />
+        </figure>
       </section>
 
       <SiteFooter

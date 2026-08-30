@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import MobileNav from "@/app/components/MobileNav";
 
@@ -7,10 +8,14 @@ export default function SiteHeader({ navItems }: { navItems: NavItem[] }) {
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="The Marouf Method home">
-        <span className="brand-mark">
-          <span className="brand-mark-script">Kareem</span>
-          <span className="brand-mark-caption">MAROUF</span>
-        </span>
+        <Image
+          className="brand-logo"
+          src="/marouf-assets/logo.png"
+          alt=""
+          width={128}
+          height={128}
+          priority
+        />
         <span>
           <strong>The Marouf Method</strong>
           <small>WHERE KNOWLEDGE BECOMES MASTERY</small>

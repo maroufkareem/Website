@@ -135,7 +135,7 @@ export default async function Home() {
               <li key={credential}>{credential}</li>
             ))}
           </ul>
-          <a className="btn secondary about-cta" href="/achievements">MEET DR. KAREEM</a>
+          <a className="btn secondary about-cta" href="/contact">MEET DR. KAREEM</a>
         </div>
         </div>
       </section>
