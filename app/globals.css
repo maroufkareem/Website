@@ -2131,6 +2131,21 @@ footer a {
     padding: 10px 18px;
   }
 
+  /* Legibility: these sit at 5-9px on desktop to match the reference, which
+     is too small to read on a phone. Raised here only. The 10px labels
+     (badges, meta, subhead) are left alone — those are deliberate, and so
+     is the 5px mark caption, which is decorative: the wordmark next to it
+     already spells the name, and enlarging it crowds the circle. */
+  .brand small {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+
+  .testimonial-grid strong,
+  .parent-note strong {
+    font-size: 11px;
+  }
+
   .featured-images img {
     height: 390px;
   }
