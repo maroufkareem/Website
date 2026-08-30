@@ -1115,7 +1115,7 @@ footer p {
 .book-card {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   gap: 97px;
   min-height: 378px;
   padding: 18px;
@@ -1133,6 +1133,7 @@ footer p {
 .book-card > div {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex: 0 0 207px;
   min-width: 0;
 }
@@ -1155,7 +1156,7 @@ footer p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: auto;
   padding: 4px 13px;
   border: 1px solid var(--gold);
   color: var(--bronze);
@@ -1178,14 +1179,44 @@ footer p {
 
 .featured-images img {
   width: 100%;
-  height: 560px;
-  object-fit: cover;
+  height: 620px;
+  /* `cover` cropped the top and bottom off the poster. `contain` shows the
+     whole cover; the letterbox blends into the section background. */
+  object-fit: contain;
+}
+
+/* Matches the GSAP scroll animations, which also bail out for this. */
+@media (prefers-reduced-motion: reduce) {
+  .pill {
+    animation: none !important;
+  }
+}
+
+@keyframes pill-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 166, 90, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(201, 166, 90, 0);
+  }
+}
+
+@keyframes pill-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .pill {
   position: absolute;
   top: 22px;
   right: 22px;
+  animation: pill-in 0.5s ease-out both, pill-pulse 2.6s ease-out 0.5s infinite;
   display: inline-flex;
   margin: 0;
   padding: 9px 18px;

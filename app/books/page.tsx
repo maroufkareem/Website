@@ -46,8 +46,8 @@ export default async function BooksPage() {
           <Image
             src={settings.featuredImage1Url}
             alt="Biology guide preview"
-            width={1140}
-            height={1120}
+            width={920}
+            height={1280}
             sizes="(max-width: 820px) 100vw, 570px"
           />
         </div>
