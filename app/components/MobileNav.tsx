@@ -87,6 +87,7 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
               <Link
                 className="btn primary mobile-nav-cta"
                 href="/contact"
+                data-open-trial
                 onClick={() => setOpen(false)}
               >
                 REGISTER NOW

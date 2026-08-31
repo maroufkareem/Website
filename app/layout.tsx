@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat, Inter, Dancing_Script } from "next/font/google";
 import ScrollAnimations from "@/app/components/ScrollAnimations";
+import TrialDialog from "@/app/components/TrialDialog";
 import "./globals.css";
 
 /* Loaded through next/font rather than an @import in globals.css: the
@@ -57,6 +58,7 @@ export default function RootLayout({
       <body>
         <ScrollAnimations />
         {children}
+        <TrialDialog />
       </body>
     </html>
   );

@@ -121,32 +121,42 @@ export default function QuizRunner({ slug, passMark, questions }: Props) {
   /* ---------- name / email gate ---------- */
   if (stage === "intro") {
     return (
-      <form className="enquiry-form quiz-intro" onSubmit={startQuiz}>
-        <p className="quiz-intro-note">
-          {questions.length} question{questions.length === 1 ? "" : "s"} · pass mark {passMark}%
-        </p>
-        <p className="quiz-intro-note">
-          Enter your details so Dr. Kareem can see how you did.
-        </p>
-        <div className="enquiry-form-row">
-          <input
-            type="text"
-            placeholder="Full name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            autoComplete="name"
-          />
-          <input
-            type="email"
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            autoComplete="email"
-          />
+      <form className="form-card panel-form quiz-intro" onSubmit={startQuiz}>
+        <div>
+          <p className="eyebrow">BEFORE YOU START</p>
+          <h2>
+            {questions.length} question{questions.length === 1 ? "" : "s"}.
+            <span>Pass mark {passMark}%.</span>
+          </h2>
+          <p className="form-lede">
+            Enter your details so Dr. Kareem can see how you did.
+          </p>
         </div>
-        <button type="submit" className="btn primary">
+        <div className="form-grid">
+          <label className="form-field">
+            <span>Student name</span>
+            <input
+              type="text"
+              placeholder="Full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              autoComplete="name"
+            />
+          </label>
+          <label className="form-field">
+            <span>Email</span>
+            <input
+              type="email"
+              placeholder="Parent or student email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </label>
+        </div>
+        <button type="submit" className="form-submit">
           START QUIZ
         </button>
       </form>

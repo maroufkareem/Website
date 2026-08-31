@@ -28,7 +28,7 @@ export default function SiteHeader({ navItems }: { navItems: NavItem[] }) {
           </Link>
         ))}
       </nav>
-      <Link className="header-cta" href="/contact">REGISTER NOW</Link>
+      <Link className="header-cta" href="/contact" data-open-trial>REGISTER NOW</Link>
       <MobileNav navItems={navItems} />
     </header>
   );

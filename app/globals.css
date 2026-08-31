@@ -1137,12 +1137,18 @@ footer p {
   background: var(--cream);
 }
 
+/* align-self, not the card's stretch: a stretched flex item gets a definite
+   height from the 378px card, which overrides aspect-ratio and renders the
+   cover far taller than it is wide. contain keeps the odd sizes (the square
+   capsule, the 1880x3000 psychology cover) uncropped inside the same box. */
 .book-card img {
   width: 185px;
+  height: auto;
   flex-shrink: 0;
+  align-self: center;
   aspect-ratio: 185 / 239;
-  object-fit: cover;
-  background: rgba(26, 23, 18, 0.06);
+  object-fit: contain;
+  background: transparent;
 }
 
 .book-card > div {
@@ -1358,22 +1364,22 @@ cite span {
     url("/marouf-assets/hero.jpg") center / cover;
 }
 
-.enrollment h2 {
+.enrollment > h2 {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.enrollment p:not(.eyebrow) {
+.enrollment > p:not(.eyebrow) {
   max-width: 760px;
   margin: 0 auto 28px;
 }
 
-.enrollment .actions {
+.enrollment > .actions {
   justify-content: center;
 }
 
-.enrollment .btn {
+.enrollment > .actions .btn {
   font-size: 10px;
 }
 
@@ -1382,78 +1388,457 @@ cite span {
   color: var(--gold) !important;
 }
 
-.enquiry-form {
-  max-width: 620px;
-  margin: 28px auto 0;
+/* ---------- trial dialog ----------
+   The booking form as a modal: dimmed backdrop, the same split panel inside,
+   dismissed by the close button, the backdrop, or Escape. */
+
+.form-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 28px 20px;
+  background: rgba(6, 6, 6, 0.72);
+  backdrop-filter: blur(4px);
+  animation: overlay-in 0.2s ease-out both;
+  overflow-y: auto;
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form-split.form-modal {
+  margin: auto;
+  width: 100%;
+  max-height: calc(100vh - 56px);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+  animation: modal-in 0.24s ease-out both;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Only the form half scrolls, so the aside stays put on short viewports. */
+.form-modal .form-main {
+  position: relative;
+  overflow-y: auto;
+}
+
+.form-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(26, 23, 18, 0.45);
+  font-family: var(--font-body);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.form-close:hover {
+  color: var(--ink);
+}
+
+.form-split.form-modal::before,
+.form-split.form-modal::after {
+  width: 62px;
+  height: 62px;
+}
+
+@media (max-width: 900px) {
+  .form-split.form-modal {
+    max-height: none;
+  }
+
+  .form-overlay {
+    place-items: start center;
+  }
+}
+
+/* ---------- form panels ----------
+   Every public form (contact, reservation, quiz gate) uses one treatment: a
+   cream plate with gold-labelled underline fields and a solid gold CTA. The
+   two-column pages pair it with a dark editorial aside; the quiz gate uses the
+   plate on its own. */
+
+.form-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  max-width: 1080px;
+  margin: 44px auto 0;
+  text-align: left;
+  box-shadow: 0 28px 70px rgba(8, 8, 8, 0.28);
+}
+
+/* The reference frames the panel with an offset gold L at opposite corners. */
+.form-split::before,
+.form-split::after {
+  content: "";
+  position: absolute;
+  width: 78px;
+  height: 78px;
+  pointer-events: none;
+}
+
+.form-split::before {
+  top: -11px;
+  left: -11px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+
+.form-split::after {
+  right: -11px;
+  bottom: -11px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.form-aside {
   display: flex;
   flex-direction: column;
+  padding: 56px 46px;
+  background: linear-gradient(152deg, #251d13 0%, #14100b 52%, #090807 100%);
+}
+
+.form-aside .eyebrow {
+  margin: 0;
+  color: var(--gold);
+}
+
+.form-aside .eyebrow-rule {
+  margin: 14px 0 30px;
+}
+
+.form-aside h2 {
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: clamp(30px, 2.7vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
+.form-aside h2 span {
+  display: block;
+  color: var(--gold);
+  font-style: italic;
+}
+
+.form-aside p {
+  color: rgba(252, 250, 246, 0.72);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.form-aside-rule {
+  display: block;
+  width: 54px;
+  height: 1px;
+  margin: 32px 0;
+  background: var(--gold);
+}
+
+.form-aside-list {
+  margin: 0 0 48px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-aside-list li {
+  display: flex;
+  align-items: baseline;
   gap: 14px;
+  color: rgba(252, 250, 246, 0.86);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form-aside-list li::before {
+  content: "";
+  flex: 0 0 18px;
+  height: 1px;
+  background: var(--gold);
+  transform: translateY(-4px);
+}
+
+.form-aside-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 10px;
+  align-self: flex-start;
+  margin: auto 0 0;
+  padding: 13px 20px;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.form-aside-badge::before {
+  content: "\2022";
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* The cream plate. .form-card is the standalone variant (quiz gate, success
+   states); .form-main is the same plate inside a .form-split. */
+.form-main,
+.form-card {
+  padding: 54px 46px;
+  background: var(--cream);
+  color: var(--ink);
   text-align: left;
 }
 
-.enquiry-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.enquiry-form input,
-.enquiry-form select,
-.enquiry-form textarea {
-  width: 100%;
-  background: rgba(252, 250, 246, 0.04);
+.form-card {
+  max-width: 620px;
+  margin: 32px auto 0;
   border: 1px solid var(--line);
-  color: var(--cream);
-  font-family: inherit;
-  font-size: 13px;
-  padding: 13px 16px;
-  border-radius: 2px;
-  transition: border-color 0.18s ease, background 0.18s ease;
+  box-shadow: 0 18px 44px rgba(26, 23, 18, 0.08);
 }
 
-.enquiry-form textarea {
+.form-main .eyebrow,
+.form-card .eyebrow {
+  margin: 0 0 14px;
+  color: var(--bronze);
+}
+
+.form-main h2,
+.form-card h2 {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.form-main h2 span,
+.form-card h2 span {
+  display: block;
+  color: var(--gold);
+  font-style: italic;
+}
+
+.form-lede {
+  color: #5c574f !important;
+  font-family: var(--font-body);
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.65;
+  margin: 18px 0 0 !important;
+  max-width: 52ch;
+}
+
+.panel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 34px;
+  text-align: left;
+}
+
+.panel-form .form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 32px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.form-field > span {
+  color: var(--bronze);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 9px 2px 11px;
+  border: 0;
+  border-bottom: 1px solid rgba(201, 166, 90, 0.55);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-field textarea {
   resize: vertical;
-  min-height: 110px;
+  min-height: 76px;
+  line-height: 1.6;
 }
 
-.enquiry-form select {
+/* Native select arrows sit badly on an underline field, so draw the caret. */
+.form-field select {
   appearance: none;
-  color: var(--muted);
+  padding-right: 24px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--bronze) 50%),
+    linear-gradient(135deg, var(--bronze) 50%, transparent 50%);
+  background-position: right 9px top 52%, right 4px top 52%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
 }
 
-.enquiry-form select:has(option:checked:not([value=""])) {
-  color: var(--cream);
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(26, 23, 18, 0.36);
 }
 
-.enquiry-form input::placeholder,
-.enquiry-form textarea::placeholder {
-  color: var(--muted);
-}
-
-.enquiry-form input:focus,
-.enquiry-form select:focus,
-.enquiry-form textarea:focus {
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
   outline: none;
-  border-color: var(--gold);
-  background: rgba(252, 250, 246, 0.07);
+  border-bottom-color: var(--gold);
+  box-shadow: 0 1px 0 0 var(--gold);
 }
 
-.enquiry-form .btn.primary {
-  border: none;
+.form-submit {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
   cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.enquiry-form .btn.primary:disabled {
+.form-submit:hover {
+  transform: translateY(-2px);
+  background: var(--gold-soft);
+}
+
+.form-submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
-.enquiry-form-error {
-  color: #e58989;
-  font-size: 12px;
-  font-weight: 700;
+.form-fine {
+  color: rgba(26, 23, 18, 0.5) !important;
+  font-family: var(--font-body);
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.55;
   margin: 0 !important;
+  text-align: center;
+}
+
+.form-alert {
+  color: #a3342c !important;
+  font-family: var(--font-ui);
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+/* Success replaces the fields inside the same plate. */
+.form-done h2 {
+  margin-bottom: 16px;
+}
+
+.form-done .form-lede {
+  margin-bottom: 26px !important;
+}
+
+.form-done .btn.secondary {
+  color: var(--bronze);
+  border-color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .form-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-aside {
+    padding: 42px 34px;
+  }
+
+  .form-aside-list {
+    margin-bottom: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-split {
+    margin-top: 34px;
+  }
+
+  .form-split::before,
+  .form-split::after {
+    width: 46px;
+    height: 46px;
+  }
+
+  .panel-form .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-main,
+  .form-card {
+    padding: 34px 22px;
+  }
+
+  .form-aside {
+    padding: 34px 22px;
+  }
 }
 
 /* ---------- student message screenshots ---------- */
@@ -1594,12 +1979,15 @@ cite span {
   margin-bottom: 30px;
 }
 
-.quiz-intro,
 .quiz-form,
 .quiz-result {
   padding: 30px;
   background: #111111;
   border: 1px solid var(--line);
+}
+
+.quiz-intro {
+  margin-top: 0;
 }
 
 .quiz-intro-note {
@@ -1752,7 +2140,6 @@ cite span {
 }
 
 @media (max-width: 640px) {
-  .quiz-intro,
   .quiz-form,
   .quiz-result,
   .quiz-card {
@@ -1766,80 +2153,13 @@ cite span {
 
 /* ---------- reserve a book ---------- */
 
+/* The panel supplies its own cream plate, so the section behind it goes dark
+   (matching the enrollment section) or the right half would vanish. */
 .section.reserve-section {
-  background: var(--cream);
+  background:
+    linear-gradient(rgba(8, 8, 8, 0.9), rgba(8, 8, 8, 0.9)),
+    url("/marouf-assets/hero.jpg") center / cover;
   padding-bottom: 90px;
-}
-
-.reserve-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 90px;
-  align-items: start;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.reserve-intro h2 {
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: clamp(30px, 2.9vw, 44px);
-  font-weight: 700;
-  letter-spacing: -1px;
-  line-height: 1.05;
-  margin-bottom: 26px;
-}
-
-.reserve-intro p {
-  color: #5c574f;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.6;
-}
-
-.reserve-intro .credentials {
-  margin-top: 28px;
-}
-
-.reserve-intro .credentials li {
-  color: #4a4741;
-  font-family: var(--font-ui);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-}
-
-/* The form sits on the cream section, so it needs its own dark plate for the
-   existing .enquiry-form field styling to stay legible. */
-.reserve-form-wrap {
-  padding: 34px;
-  background: #111111;
-  border: 1px solid var(--line);
-}
-
-.reserve-form-wrap .enquiry-form {
-  max-width: none;
-  margin: 0;
-}
-
-.enquiry-label {
-  color: var(--gold);
-  font-family: var(--font-ui);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
-
-.enquiry-form select {
-  width: 100%;
-  background: rgba(252, 250, 246, 0.04);
-  border: 1px solid var(--line);
-  color: var(--cream);
-  font-family: inherit;
-  font-size: 13px;
-  padding: 13px 16px;
-  border-radius: 2px;
 }
 
 .form-error {
@@ -1855,46 +2175,6 @@ cite span {
   font-size: 12px !important;
   font-weight: 400 !important;
   margin: 4px 0 0 !important;
-}
-
-.reserve-success {
-  padding: 40px 34px;
-  background: #111111;
-  border: 1px solid var(--gold);
-}
-
-.reserve-success h2 {
-  color: var(--cream);
-  font-family: var(--font-display);
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.reserve-success p {
-  color: rgba(252, 250, 246, 0.78);
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-@media (max-width: 900px) {
-  .reserve-inner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 44px;
-  }
-}
-
-@media (max-width: 640px) {
-  .enquiry-form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .reserve-form-wrap,
-  .reserve-success {
-    padding: 24px 20px;
-  }
 }
 
 footer {
@@ -2160,6 +2440,7 @@ footer a {
   .book-card img {
     width: 100%;
     max-width: 185px;
+    align-self: flex-start;
   }
 
   .book-card > div {

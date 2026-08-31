@@ -6,11 +6,23 @@ type Props = {
   bookTitles: string[];
   /** Pre-selected book, from the ?book= query on the reserve page. */
   initialBook?: string;
+  /** Panel heading, rendered above the fields and replaced by the confirmation. */
+  eyebrow: string;
+  title: string;
+  titleAccent: string;
+  lede: string;
 };
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function ReservationForm({ bookTitles, initialBook }: Props) {
+export default function ReservationForm({
+  bookTitles,
+  initialBook,
+  eyebrow,
+  title,
+  titleAccent,
+  lede,
+}: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [reservedTitle, setReservedTitle] = useState("");
@@ -61,15 +73,16 @@ export default function ReservationForm({ bookTitles, initialBook }: Props) {
 
   if (status === "success") {
     return (
-      <div className="reserve-success" role="status">
-        <p className="eyebrow gold">Reservation confirmed</p>
-        <h2>Your copy is reserved.</h2>
-        <p>
+      <div className="form-done" role="status">
+        <p className="eyebrow">RESERVATION CONFIRMED</p>
+        <h2>
+          Your copy is reserved.<br />
+          <span>No payment needed.</span>
+        </h2>
+        <p className="form-lede">
           We&apos;ve reserved <strong>{reservedTitle}</strong>{" "}
-          {emailSent
-            ? "for you and sent a confirmation email."
-            : "for you."}{" "}
-          No payment is needed now — we&apos;ll be in touch to arrange collection.
+          {emailSent ? "for you and sent a confirmation email." : "for you."} We&apos;ll be in touch
+          to arrange collection.
         </p>
         <button type="button" className="btn secondary" onClick={() => setStatus("idle")}>
           RESERVE ANOTHER BOOK
@@ -79,43 +92,75 @@ export default function ReservationForm({ bookTitles, initialBook }: Props) {
   }
 
   return (
-    <form className="enquiry-form" onSubmit={handleSubmit}>
-      <label className="enquiry-label" htmlFor="bookTitle">
-        Book
-      </label>
-      <select id="bookTitle" name="bookTitle" defaultValue={preselected} required>
-        <option value="" disabled>
-          Choose a book
-        </option>
-        {bookTitles.map((title) => (
-          <option key={title} value={title}>
-            {title}
-          </option>
-        ))}
-      </select>
+    <>
+      <p className="eyebrow">{eyebrow}</p>
+      <h2>
+        {title}
+        <span>{titleAccent}</span>
+      </h2>
+      <p className="form-lede">{lede}</p>
 
-      <div className="enquiry-form-row">
-        <input type="text" name="name" placeholder="Full name" required autoComplete="name" />
-        <input type="email" name="email" placeholder="Email address" required autoComplete="email" />
-      </div>
+      <form className="panel-form" onSubmit={handleSubmit}>
+        <label className="form-field">
+          <span>Book</span>
+          <select id="bookTitle" name="bookTitle" defaultValue={preselected} required>
+            <option value="" disabled>
+              Choose a book
+            </option>
+            {bookTitles.map((title) => (
+              <option key={title} value={title}>
+                {title}
+              </option>
+            ))}
+          </select>
+        </label>
 
-      <input type="tel" name="phone" placeholder="Phone / WhatsApp (optional)" autoComplete="tel" />
-      <textarea name="note" rows={3} placeholder="Anything we should know? (optional)" />
+        <div className="form-grid">
+          <label className="form-field">
+            <span>Student name</span>
+            <input type="text" name="name" placeholder="Full name" required autoComplete="name" />
+          </label>
+          <label className="form-field">
+            <span>Email</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="Parent or student email"
+              required
+              autoComplete="email"
+            />
+          </label>
+        </div>
 
-      {status === "error" && (
-        <p className="form-error" role="alert">
-          {errorMessage}
+        <label className="form-field">
+          <span>Phone number</span>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone / WhatsApp (optional)"
+            autoComplete="tel"
+          />
+        </label>
+
+        <label className="form-field">
+          <span>Note</span>
+          <textarea name="note" rows={3} placeholder="Anything we should know? (optional)" />
+        </label>
+
+        {status === "error" && (
+          <p className="form-alert" role="alert">
+            {errorMessage}
+          </p>
+        )}
+
+        <button type="submit" className="form-submit" disabled={status === "submitting"}>
+          {status === "submitting" ? "RESERVING…" : "CONFIRM MY RESERVATION"}
+        </button>
+
+        <p className="form-fine">
+          Reservation only — no payment is taken online. We&apos;ll contact you to arrange collection.
         </p>
-      )}
-
-      <button type="submit" className="btn primary" disabled={status === "submitting"}>
-        {status === "submitting" ? "RESERVING…" : "CONFIRM RESERVATION"}
-      </button>
-
-      <p className="form-note">
-        Reservation only — no payment is taken online. We&apos;ll contact you to arrange
-        collection.
-      </p>
-    </form>
+      </form>
+    </>
   );
 }

@@ -135,7 +135,7 @@ export default async function Home() {
               <li key={credential}>{credential}</li>
             ))}
           </ul>
-          <a className="btn secondary about-cta" href="/contact">MEET DR. KAREEM</a>
+          <a className="btn secondary about-cta" href="/contact" data-open-trial>MEET DR. KAREEM</a>
         </div>
         </div>
       </section>
@@ -271,10 +271,11 @@ export default async function Home() {
         <h2>Begin Your <span>Academic Journey</span></h2>
         <p>Reserve your place in The Marouf Method’s Biology or Psychology program and build the understanding, confidence, and exam skills needed for lasting success.</p>
         <div className="actions">
-          <a className="btn primary" href={`mailto:${contactEmail}`}>REGISTER NOW</a>
+          <a className="btn primary" href="/contact" data-open-trial>REGISTER NOW</a>
           <a className="btn whatsapp" href={whatsappHref}>● CHAT ON WHATSAPP</a>
         </div>
         <p className="contact-line">— {contactPhone}    — {contactEmail}</p>
+
       </section>
 
       <SiteFooter

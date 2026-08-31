@@ -28,27 +28,36 @@ export default async function ReservePage({
       <SiteHeader navItems={navItems} />
 
       <section className="section reserve-section">
-        <div className="reserve-inner">
-          <div className="reserve-intro">
-            <p className="eyebrow gold">RESERVE A COPY</p>
+        <div className="form-split">
+          <div className="form-aside">
+            <p className="eyebrow">RESERVE A COPY</p>
             <span className="eyebrow-rule" />
             <h2>
-              Reserve your book.<br />
+              Reserve your book.
               <span>No payment needed.</span>
             </h2>
             <p>
               Tell us which guide you would like and how to reach you. We&apos;ll hold a copy and
               contact you to arrange collection — payment is settled in person.
             </p>
-            <ul className="credentials">
+            <span className="form-aside-rule" />
+            <ul className="form-aside-list">
               <li>No online payment</li>
               <li>Confirmation email sent instantly</li>
               <li>Collect from Atlas Bookstore</li>
             </ul>
+            <p className="form-aside-badge">NO PAYMENT &middot; NO COMMITMENT</p>
           </div>
 
-          <div className="reserve-form-wrap">
-            <ReservationForm bookTitles={books.map((b) => b.title)} initialBook={book} />
+          <div className="form-main">
+            <ReservationForm
+              bookTitles={books.map((b) => b.title)}
+              initialBook={book}
+              eyebrow="RESERVE YOUR COPY"
+              title="Hold Your Book."
+              titleAccent="Collect In Person."
+              lede="Choose your guide and leave your details — we'll set a copy aside and confirm by email."
+            />
           </div>
         </div>
       </section>
