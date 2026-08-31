@@ -1672,6 +1672,7 @@ cite span {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
   margin-top: 34px;
   text-align: left;
 }
@@ -1786,6 +1787,25 @@ cite span {
   font-size: 12px !important;
   font-weight: 600 !important;
   margin: 0 !important;
+}
+
+/* Group heading inside a longer form (enrollment splits student / parent). */
+.form-group-label {
+  margin: 0 !important;
+  color: var(--ink) !important;
+  font-family: var(--font-ui);
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.form-group-label + .form-grid {
+  margin-top: -8px;
+}
+
+.panel-form .form-field.wide {
+  grid-column: 1 / -1;
 }
 
 /* Success replaces the fields inside the same plate. */
@@ -2149,6 +2169,15 @@ cite span {
   .quiz-result h2 {
     font-size: 40px !important;
   }
+}
+
+/* ---------- enrollment ---------- */
+
+.section.enroll-section {
+  background:
+    linear-gradient(rgba(8, 8, 8, 0.9), rgba(8, 8, 8, 0.9)),
+    url("/marouf-assets/hero.jpg") center / cover;
+  padding-bottom: 90px;
 }
 
 /* ---------- reserve a book ---------- */

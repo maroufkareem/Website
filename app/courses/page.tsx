@@ -36,7 +36,12 @@ export default async function CoursesPage() {
               <span className="program-rule" />
               <p>{program.body}</p>
               <div className="actions small">
-                <a className="btn primary" href="/contact">RESERVE YOUR PLACE</a>
+                <a
+                  className="btn primary"
+                  href={`/enroll?program=${encodeURIComponent(program.title)}`}
+                >
+                  RESERVE YOUR PLACE
+                </a>
               </div>
             </article>
           ))}

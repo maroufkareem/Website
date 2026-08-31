@@ -157,7 +157,12 @@ export default async function Home() {
               <p>{program.body}</p>
               <div className="actions small">
                 <a className="btn secondary" href="/courses">VIEW PROGRAM</a>
-                <a className="btn primary" href="/contact">RESERVE YOUR PLACE</a>
+                <a
+                  className="btn primary"
+                  href={`/enroll?program=${encodeURIComponent(program.title)}`}
+                >
+                  RESERVE YOUR PLACE
+                </a>
               </div>
             </article>
           ))}
