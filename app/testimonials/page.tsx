@@ -46,10 +46,10 @@ export default async function TestimonialsPage() {
         <p className="subhead">UNEDITED MESSAGES FROM STUDENTS AND PARENTS</p>
         <figure className="messages-shot">
           <Image
-            src="/marouf-assets/student-messages.jpg"
-            alt="Screenshots of messages from students and parents about Dr. Kareem's teaching"
-            width={1400}
-            height={933}
+            src="/marouf-assets/testimonial-collage.jpg"
+            alt="Collage of WhatsApp and Instagram messages from students and parents thanking Dr. Kareem after sessions and exams"
+            width={1604}
+            height={1136}
             sizes="(max-width: 820px) 100vw, 1100px"
           />
         </figure>
