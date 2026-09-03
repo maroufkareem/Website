@@ -55,7 +55,7 @@ export const DEFAULT_METHOD_STEPS: MethodStep[] = [
 export const DEFAULT_BOOKS = [
   { id: -1, imageUrl: "/marouf-assets/book-9.jpg", label: "Grade 9 - Cambridge", title: "Biology Core - Grade 9", body: "A clear, structured guide that simplifies core Biology concepts and supports confident learning throughout the year.", sortOrder: 0, published: true },
   { id: -2, imageUrl: "/marouf-assets/book-10.jpg", label: "Grade 10 - O Level", title: "Biology O Level - Grade 10", body: "A complete Biology guide with clear explanations, diagrams, revision support, and exam-focused practice.", sortOrder: 1, published: true },
-  { id: -3, imageUrl: "/marouf-assets/book-capsule.png", label: "IGCSE BIOLOGY - REVISION GUIDE", title: "Marouf's Bio Capsule", body: "A focused revision guide that simplifies key Biology topics and strengthens exam preparation.", sortOrder: 2, published: true },
+  { id: -3, imageUrl: "/marouf-assets/book-capsule-cover.jpg", label: "IGCSE BIOLOGY - REVISION GUIDE", title: "Marouf's Bio Capsule", body: "A focused revision guide that simplifies key Biology topics and strengthens exam preparation.", sortOrder: 2, published: true },
   { id: -4, imageUrl: "/marouf-assets/book-psych.jpg", label: "IGCSE - PSYCHOLOGY O LEVEL", title: "Psychology O Level", body: "A structured Psychology guide covering key concepts, clear explanations, and exam-focused learning.", sortOrder: 3, published: true },
 ];
 
@@ -100,8 +100,8 @@ export const DEFAULT_SITE_SETTINGS = {
   featuredBody:
     "A comprehensive Year 10 Biology guide designed with clear explanations, visual summaries, comparison tables, diagrams, and organized syllabus coverage for maximum exam readiness.",
   featuredChecklist: ["28 organized chapters", "Visual summaries", "Comparison tables", "Clear definitions", "Exam-focused support"],
-  featuredImage1Url: "/marouf-assets/clinic-1.jpg",
-  featuredImage2Url: "/marouf-assets/clinic-2.jpg",
+  featuredImage1Url: "/marouf-assets/book-capsule-cover.jpg",
+  featuredImage2Url: "/marouf-assets/book-capsule-cover.jpg",
 
   contactEmail: "maroufkareem0@gmail.com",
   contactPhone: "01114626999",

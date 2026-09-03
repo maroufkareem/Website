@@ -53,8 +53,8 @@ export const siteSettings = pgTable("site_settings", {
   featuredHeading: text("featured_heading").notNull().default(""),
   featuredBody: text("featured_body").notNull().default(""),
   featuredChecklist: jsonb("featured_checklist").$type<string[]>().notNull().default([]),
-  featuredImage1Url: text("featured_image_1_url").notNull().default("/marouf-assets/clinic-1.jpg"),
-  featuredImage2Url: text("featured_image_2_url").notNull().default("/marouf-assets/clinic-2.jpg"),
+  featuredImage1Url: text("featured_image_1_url").notNull().default("/marouf-assets/book-capsule-cover.jpg"),
+  featuredImage2Url: text("featured_image_2_url").notNull().default("/marouf-assets/book-capsule-cover.jpg"),
 
   // Contact & social
   contactEmail: text("contact_email").notNull().default(""),
