@@ -110,37 +110,6 @@ img {
   object-fit: contain;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  gap: 1px;
-  width: 64px;
-  height: 64px;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 35%, rgba(201, 166, 90, 0.22), rgba(201, 166, 90, 0.04) 70%);
-  color: var(--gold);
-  line-height: 1;
-}
-
-.brand-mark span {
-  display: block;
-}
-
-.brand-mark .brand-mark-script {
-  font-family: var(--font-dancing), cursive;
-  font-size: 17px;
-  font-weight: 700;
-}
-
-.brand-mark .brand-mark-caption {
-  margin-top: 2px;
-  font-family: var(--font-display);
-  font-size: 6px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
-}
-
 .brand strong {
   display: block;
   font-family: var(--font-display);
@@ -2290,8 +2259,7 @@ footer a {
   }
 
   /* The 64px logo is a desktop value; at phone widths it squeezes the
-     wordmark into two lines. (.brand-mark is now admin-only — the public
-     header uses the real logo image.) */
+     wordmark into two lines. */
   .brand-logo {
     width: 46px;
     height: 46px;

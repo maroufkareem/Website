@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Montserrat, Inter, Dancing_Script } from "next/font/google";
+import { Playfair_Display, Montserrat, Inter } from "next/font/google";
 import ScrollAnimations from "@/app/components/ScrollAnimations";
 import TrialDialog from "@/app/components/TrialDialog";
 import "./globals.css";
@@ -28,13 +28,6 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-  variable: "--font-dancing",
-});
-
 export const metadata: Metadata = {
   title: "The Marouf Method | Cambridge Biology & Psychology",
   description:
@@ -53,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${montserrat.variable} ${inter.variable} ${dancingScript.variable}`}
+      className={`${playfair.variable} ${montserrat.variable} ${inter.variable}`}
     >
       <body>
         <ScrollAnimations />

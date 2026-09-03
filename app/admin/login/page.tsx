@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
 function LoginForm() {
@@ -40,9 +41,14 @@ function LoginForm() {
         className="w-full max-w-sm rounded-lg border border-[#C9A65A]/25 bg-[#111111] p-8 shadow-xl"
       >
         <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full border-2 border-[#C9A65A] font-serif text-2xl font-bold text-[#C9A65A]">
-            M
-          </div>
+          <Image
+            src="/marouf-assets/logo.png"
+            alt=""
+            width={128}
+            height={128}
+            className="mx-auto mb-3 h-16 w-16"
+            priority
+          />
           <h1 className="font-serif text-xl font-bold text-[#FCFAF6]">The Marouf Method</h1>
           <p className="mt-1 text-xs tracking-widest text-[#C9A65A]">ADMIN SIGN IN</p>
         </div>

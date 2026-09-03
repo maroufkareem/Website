@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import SignOutButton from "./SignOutButton";
 
@@ -38,10 +39,14 @@ export default function AdminShell({
     <div className="flex min-h-screen bg-[#0b0b0b] text-neutral-100">
       <div className="fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-[#C9A65A]/20 bg-[#111111] px-4 py-3 md:hidden">
         <div className="flex items-center gap-3">
-          <span className="brand-mark" style={{ width: 36, height: 36 }}>
-            <span className="brand-mark-script" style={{ fontSize: 13 }}>Kareem</span>
-            <span className="brand-mark-caption" style={{ fontSize: 5 }}>MAROUF</span>
-          </span>
+          <Image
+            src="/marouf-assets/logo.png"
+            alt=""
+            width={128}
+            height={128}
+            className="h-9 w-9 shrink-0"
+            priority
+          />
           <p className="font-serif text-sm font-bold text-[#FCFAF6]">Admin Panel</p>
         </div>
         <button
@@ -76,10 +81,14 @@ export default function AdminShell({
         }`}
       >
         <div className="mb-8 flex items-center gap-3">
-          <span className="brand-mark">
-            <span className="brand-mark-script">Kareem</span>
-            <span className="brand-mark-caption">MAROUF</span>
-          </span>
+          <Image
+            src="/marouf-assets/logo.png"
+            alt=""
+            width={128}
+            height={128}
+            className="h-12 w-12 shrink-0"
+            priority
+          />
           <div>
             <p className="font-serif text-sm font-bold leading-tight text-[#FCFAF6]">The Marouf Method</p>
             <p className="text-[10px] font-bold tracking-widest text-[#C9A65A]">ADMIN PANEL</p>
