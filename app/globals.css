@@ -338,17 +338,34 @@ img {
   display: none;
 }
 
-/* The reference pins this at top 610 / right 92; nudged down and left from
-   there by request. */
+/* Sits just below the subject's hand. The hero photo is a `contain`
+   background pinned at 50% 78px, so below 1747px it scales with the
+   viewport width — a fixed px `top` drifts up across the hand as the
+   window widens. Track the photo instead: hero.jpg is 1672x941, so a
+   source point maps to `78px + (y / 1672 * 100)vw`. The card's top edge
+   targets y=765, ~30px under the fist and its cuff buttons.
+
+   The floor matters: the hero copy is laid out in flow and barely moves,
+   so below ~1277px the tracked position climbs over the paragraph. The
+   photo has shrunk by then too, leaving the hand well clear of 662px. */
 .doctor-card-float {
   position: absolute;
   z-index: 4;
-  right: 172px;
-  top: 662px;
+  right: 11.94vw;
+  top: max(662px, calc(78px + 45.75vw));
   width: 280px;
   padding: 10px 20px;
   border: 1px solid var(--gold);
   background: rgba(15, 15, 15, 0.84);
+}
+
+/* Past 1747px the photo is height-constrained: it stops scaling and centres
+   horizontally instead, so the vw tracking above would overshoot. */
+@media (min-width: 1747px) {
+  .doctor-card-float {
+    top: 877px;
+    right: calc(50vw - 664px);
+  }
 }
 
 .doctor-name {
