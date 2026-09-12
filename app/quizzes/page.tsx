@@ -8,10 +8,26 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 
 export const dynamic = "force-dynamic";
 
+const title = "Quizzes | The Marouf Method";
+const description =
+  "Practice Biology and Psychology quizzes from Dr. Kareem Wael Maarouf — instant marking and feedback.";
+
 export const metadata: Metadata = {
-  title: "Quizzes | The Marouf Method",
-  description:
-    "Practice Biology and Psychology quizzes from Dr. Kareem Wael Maarouf — instant marking and feedback.",
+  title,
+  description,
+  alternates: { canonical: "/quizzes" },
+  openGraph: {
+    title,
+    description,
+    url: "/quizzes",
+    images: [{ url: "/marouf-assets/hero.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/hero.jpg"],
+  },
 };
 
 export default async function QuizzesPage() {

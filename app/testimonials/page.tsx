@@ -7,9 +7,25 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 
 export const dynamic = "force-dynamic";
 
+const title = "Testimonials | The Marouf Method";
+const description = "What students and parents say about learning with Dr. Kareem Wael Maarouf.";
+
 export const metadata: Metadata = {
-  title: "Testimonials | The Marouf Method",
-  description: "What students and parents say about learning with Dr. Kareem Wael Maarouf.",
+  title,
+  description,
+  alternates: { canonical: "/testimonials" },
+  openGraph: {
+    title,
+    description,
+    url: "/testimonials",
+    images: [{ url: "/marouf-assets/hero.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/hero.jpg"],
+  },
 };
 
 export default async function TestimonialsPage() {

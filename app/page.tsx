@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getSiteData } from "@/app/lib/site-data";
 import PageViewBeacon from "@/app/components/PageViewBeacon";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // The reference renders these as solid glyphs, not hairline outlines.
 const iconProps = {

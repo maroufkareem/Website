@@ -25,7 +25,7 @@ export const DEFAULT_PROGRAMS = [
     id: -1,
     label: "BIOLOGY",
     title: "Cambridge Biology O Level",
-    price: "",
+    price: "$400",
     meta: "GRADES 10, 11 & 12    ONLINE - 8-MONTH PROGRAM",
     date: "1 OCTOBER - 1 MAY",
     body: "A complete Cambridge Biology program designed to simplify difficult concepts, strengthen scientific understanding, and improve exam-answering skills.",
@@ -106,7 +106,12 @@ export const DEFAULT_SITE_SETTINGS = {
   contactEmail: "maroufkareem0@gmail.com",
   contactPhone: "01114626999",
   contactWhatsapp: "https://wa.me/201114626999",
-  socialLinks: { instagram: "#", linkedin: "#", tiktok: "#", whatsapp: "https://wa.me/201114626999" },
+  socialLinks: {
+    instagram: "https://www.instagram.com/themaroufmethod",
+    linkedin: "#",
+    tiktok: "https://www.tiktok.com/@themaroufmethod",
+    whatsapp: "https://wa.me/201114626999",
+  },
 
   footerBlurb:
     "Premium Biology and Psychology education focused on clear understanding, academic confidence, and exam success.",

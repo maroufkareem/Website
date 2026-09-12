@@ -7,9 +7,25 @@ import ContactForm from "@/app/components/ContactForm";
 
 export const dynamic = "force-dynamic";
 
+const title = "Contact | The Marouf Method";
+const description = "Reserve your place in The Marouf Method's Biology or Psychology program.";
+
 export const metadata: Metadata = {
-  title: "Contact | The Marouf Method",
-  description: "Reserve your place in The Marouf Method's Biology or Psychology program.",
+  title,
+  description,
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title,
+    description,
+    url: "/contact",
+    images: [{ url: "/marouf-assets/hero.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/hero.jpg"],
+  },
 };
 
 export default async function ContactPage() {

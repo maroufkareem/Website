@@ -7,10 +7,26 @@ import ReservationForm from "@/app/components/ReservationForm";
 
 export const dynamic = "force-dynamic";
 
+const title = "Reserve a Book | The Marouf Method";
+const description =
+  "Reserve a copy of Dr. Kareem Wael Maarouf's Biology and Psychology guides. No payment needed — we'll contact you to arrange collection.";
+
 export const metadata: Metadata = {
-  title: "Reserve a Book | The Marouf Method",
-  description:
-    "Reserve a copy of Dr. Kareem Wael Maarouf's Biology and Psychology guides. No payment needed — we'll contact you to arrange collection.",
+  title,
+  description,
+  alternates: { canonical: "/reserve" },
+  openGraph: {
+    title,
+    description,
+    url: "/reserve",
+    images: [{ url: "/marouf-assets/book-capsule-cover.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/book-capsule-cover.jpg"],
+  },
 };
 
 export default async function ReservePage({

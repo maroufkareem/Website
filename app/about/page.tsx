@@ -7,9 +7,25 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 
 export const dynamic = "force-dynamic";
 
+const title = "About | The Marouf Method";
+const description = "About Dr. Kareem Wael Maarouf — dentist by profession, Biology and Psychology educator by passion.";
+
 export const metadata: Metadata = {
-  title: "About | The Marouf Method",
-  description: "About Dr. Kareem Wael Maarouf — dentist by profession, Biology and Psychology educator by passion.",
+  title,
+  description,
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title,
+    description,
+    url: "/about",
+    images: [{ url: "/marouf-assets/doctor-portrait.jpeg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/doctor-portrait.jpeg"],
+  },
 };
 
 export default async function AboutPage() {

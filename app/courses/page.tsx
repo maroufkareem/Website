@@ -6,9 +6,25 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 
 export const dynamic = "force-dynamic";
 
+const title = "Courses | The Marouf Method";
+const description = "Cambridge Biology and Psychology O Level programs by Dr. Kareem Wael Maarouf.";
+
 export const metadata: Metadata = {
-  title: "Courses | The Marouf Method",
-  description: "Cambridge Biology and Psychology O Level programs by Dr. Kareem Wael Maarouf.",
+  title,
+  description,
+  alternates: { canonical: "/courses" },
+  openGraph: {
+    title,
+    description,
+    url: "/courses",
+    images: [{ url: "/marouf-assets/hero.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/hero.jpg"],
+  },
 };
 
 export default async function CoursesPage() {

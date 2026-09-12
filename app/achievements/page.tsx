@@ -6,9 +6,25 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 
 export const dynamic = "force-dynamic";
 
+const title = "Achievements | The Marouf Method";
+const description = "Credentials and academic achievements behind Dr. Kareem Wael Maarouf's teaching.";
+
 export const metadata: Metadata = {
-  title: "Achievements | The Marouf Method",
-  description: "Credentials and academic achievements behind Dr. Kareem Wael Maarouf's teaching.",
+  title,
+  description,
+  alternates: { canonical: "/achievements" },
+  openGraph: {
+    title,
+    description,
+    url: "/achievements",
+    images: [{ url: "/marouf-assets/doctor-portrait.jpeg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/doctor-portrait.jpeg"],
+  },
 };
 
 export default async function AchievementsPage() {

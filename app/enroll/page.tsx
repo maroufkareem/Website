@@ -7,10 +7,26 @@ import EnrollmentForm from "@/app/components/EnrollmentForm";
 
 export const dynamic = "force-dynamic";
 
+const title = "Enrollment | The Marouf Method";
+const description =
+  "Reserve your place in a Cambridge Biology or Psychology program with Dr. Kareem Wael Maarouf.";
+
 export const metadata: Metadata = {
-  title: "Enrollment | The Marouf Method",
-  description:
-    "Reserve your place in a Cambridge Biology or Psychology program with Dr. Kareem Wael Maarouf.",
+  title,
+  description,
+  alternates: { canonical: "/enroll" },
+  openGraph: {
+    title,
+    description,
+    url: "/enroll",
+    images: [{ url: "/marouf-assets/hero.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/hero.jpg"],
+  },
 };
 
 export default async function EnrollPage({

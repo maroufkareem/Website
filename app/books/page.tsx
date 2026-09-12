@@ -7,9 +7,25 @@ import PageViewBeacon from "@/app/components/PageViewBeacon";
 
 export const dynamic = "force-dynamic";
 
+const title = "Books | The Marouf Method";
+const description = "Premium Biology and Psychology guides by Dr. Kareem Wael Maarouf — Cambridge & Pearson Edexcel.";
+
 export const metadata: Metadata = {
-  title: "Books | The Marouf Method",
-  description: "Premium Biology and Psychology guides by Dr. Kareem Wael Maarouf — Cambridge & Pearson Edexcel.",
+  title,
+  description,
+  alternates: { canonical: "/books" },
+  openGraph: {
+    title,
+    description,
+    url: "/books",
+    images: [{ url: "/marouf-assets/book-capsule-cover.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/marouf-assets/book-capsule-cover.jpg"],
+  },
 };
 
 export default async function BooksPage() {
