@@ -74,6 +74,9 @@ export default async function ContactPage() {
               title="Start With One Session."
               titleAccent="See The Difference."
               lede="Reserve a complimentary trial session with Dr. Kareem and experience a learning approach built around understanding, confidence, and exam success."
+              whatsappHref={whatsappHref}
+              contactPhone={contactPhone}
+              contactEmail={contactEmail}
             />
           </div>
         </div>

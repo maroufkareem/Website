@@ -73,6 +73,9 @@ export default async function EnrollPage({
               title="Enroll With"
               titleAccent="The Marouf Method."
               lede="Complete the student and parent details below. We'll be in touch to confirm the schedule and finish registration — nothing is paid online."
+              whatsappHref={whatsappHref}
+              contactPhone={contactPhone}
+              contactEmail={contactEmail}
             />
           </div>
         </div>

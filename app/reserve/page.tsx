@@ -73,6 +73,9 @@ export default async function ReservePage({
               title="Hold Your Book."
               titleAccent="Collect In Person."
               lede="Choose your guide and leave your details — we'll set a copy aside and confirm by email."
+              whatsappHref={whatsappHref}
+              contactPhone={contactPhone}
+              contactEmail={contactEmail}
             />
           </div>
         </div>

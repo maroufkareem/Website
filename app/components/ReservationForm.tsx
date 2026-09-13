@@ -11,6 +11,10 @@ type Props = {
   title: string;
   titleAccent: string;
   lede: string;
+  /** Shown as a direct-contact fallback if the submission fails. */
+  whatsappHref?: string;
+  contactPhone?: string;
+  contactEmail?: string;
 };
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -22,6 +26,9 @@ export default function ReservationForm({
   title,
   titleAccent,
   lede,
+  whatsappHref,
+  contactPhone,
+  contactEmail,
 }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -148,9 +155,21 @@ export default function ReservationForm({
         </label>
 
         {status === "error" && (
-          <p className="form-alert" role="alert">
-            {errorMessage}
-          </p>
+          <>
+            <p className="form-alert" role="alert">
+              {errorMessage}
+            </p>
+            {(whatsappHref || contactPhone || contactEmail) && (
+              <p className="form-alert-fallback">
+                Trouble sending this? Reach us directly —{" "}
+                {whatsappHref && <a href={whatsappHref}>WhatsApp</a>}
+                {whatsappHref && (contactPhone || contactEmail) && ", "}
+                {contactPhone && <a href={`tel:${contactPhone}`}>{contactPhone}</a>}
+                {contactPhone && contactEmail && ", or "}
+                {contactEmail && <a href={`mailto:${contactEmail}`}>{contactEmail}</a>}.
+              </p>
+            )}
+          </>
         )}
 
         <button type="submit" className="form-submit" disabled={status === "submitting"}>

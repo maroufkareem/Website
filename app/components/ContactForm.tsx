@@ -10,6 +10,10 @@ type Props = {
   lede: string;
   /** Rendered in the modal, which needs a dismiss control the inline form does not. */
   onClose?: () => void;
+  /** Shown as a direct-contact fallback if the submission fails. */
+  whatsappHref?: string;
+  contactPhone?: string;
+  contactEmail?: string;
 };
 
 const GRADES = ["Grade 9", "Grade 10", "Grade 11", "Grade 12"];
@@ -18,7 +22,16 @@ const FORMATS = ["Online", "In person"];
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function ContactForm({ eyebrow, title, titleAccent, lede, onClose }: Props) {
+export default function ContactForm({
+  eyebrow,
+  title,
+  titleAccent,
+  lede,
+  onClose,
+  whatsappHref,
+  contactPhone,
+  contactEmail,
+}: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -154,9 +167,21 @@ export default function ContactForm({ eyebrow, title, titleAccent, lede, onClose
         </div>
 
         {status === "error" && (
-          <p className="form-alert" role="alert">
-            {errorMessage}
-          </p>
+          <>
+            <p className="form-alert" role="alert">
+              {errorMessage}
+            </p>
+            {(whatsappHref || contactPhone || contactEmail) && (
+              <p className="form-alert-fallback">
+                Trouble sending this? Reach us directly —{" "}
+                {whatsappHref && <a href={whatsappHref}>WhatsApp</a>}
+                {whatsappHref && (contactPhone || contactEmail) && ", "}
+                {contactPhone && <a href={`tel:${contactPhone}`}>{contactPhone}</a>}
+                {contactPhone && contactEmail && ", or "}
+                {contactEmail && <a href={`mailto:${contactEmail}`}>{contactEmail}</a>}.
+              </p>
+            )}
+          </>
         )}
 
         <button className="form-submit" type="submit" disabled={status === "submitting"}>

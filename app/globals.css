@@ -1775,6 +1775,24 @@ cite span {
   margin: 0 !important;
 }
 
+/* Shown alongside .form-alert when a submission fails, so a visitor never
+   hits a dead end — they can still reach us directly instead of losing
+   the enquiry entirely. */
+.form-alert-fallback {
+  margin: 8px 0 0 !important;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.form-alert-fallback a {
+  color: var(--bronze);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 /* Group heading inside a longer form (enrollment splits student / parent). */
 .form-group-label {
   margin: 0 !important;

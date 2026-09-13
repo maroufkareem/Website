@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ContactForm from "@/app/components/ContactForm";
+import { DEFAULT_SITE_SETTINGS } from "@/app/lib/defaults";
 
 /* Mounted once in the root layout. Any element carrying data-open-trial opens
    it — the triggers stay plain server-rendered links (they still navigate to
@@ -91,6 +92,9 @@ export default function TrialDialog() {
             title="Start With One Session."
             titleAccent="See The Difference."
             lede="Reserve a complimentary trial session with Dr. Kareem and experience a learning approach built around understanding, confidence, and exam success."
+            whatsappHref={DEFAULT_SITE_SETTINGS.contactWhatsapp}
+            contactPhone={DEFAULT_SITE_SETTINGS.contactPhone}
+            contactEmail={DEFAULT_SITE_SETTINGS.contactEmail}
           />
         </div>
       </div>
