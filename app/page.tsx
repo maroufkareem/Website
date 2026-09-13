@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getSiteData } from "@/app/lib/site-data";
+import { keepLastWordTogether } from "@/app/lib/text";
 import PageViewBeacon from "@/app/components/PageViewBeacon";
 import SiteHeader from "@/app/components/SiteHeader";
 import SiteFooter from "@/app/components/SiteFooter";
@@ -201,7 +202,7 @@ export default async function Home() {
               <Image src={book.imageUrl} alt={book.title} width={370} height={478} sizes="185px" />
               <div>
                 <span>{book.label}</span>
-                <h3>{book.title}</h3>
+                <h3>{keepLastWordTogether(book.title)}</h3>
                 <p>{book.body}</p>
                 <a className="order" href={`/reserve?book=${encodeURIComponent(book.title)}`}>RESERVE NOW</a>
               </div>
