@@ -45,32 +45,21 @@ export default function EnrollmentForm({
     const data = new FormData(form);
     const value = (key: string) => String(data.get(key) ?? "").trim();
 
-    /* The enquiries table has columns for the student's name, email, phone and
-       program only, so the parent, country and school details are composed
-       into `message`, which the admin enquiry view already displays. */
-    const details = [
-      ["Parent name", value("parentName")],
-      ["Parent phone", value("parentPhone")],
-      ["Parent email", value("parentEmail")],
-      ["Country", value("country")],
-      ["School", value("school")],
-    ]
-      .filter(([, entry]) => entry)
-      .map(([label, entry]) => `${label}: ${entry}`);
-
-    const goals = value("goals");
-    if (goals) details.push(`Goals: ${goals}`);
-
     try {
-      const response = await fetch("/api/enquiries", {
+      const response = await fetch("/api/enrollments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: value("name"),
           email: value("email"),
           phone: value("phone"),
+          school: value("school"),
+          country: value("country"),
           programInterest: value("programInterest"),
-          message: details.join("\n"),
+          parentName: value("parentName"),
+          parentPhone: value("parentPhone"),
+          parentEmail: value("parentEmail"),
+          goals: value("goals"),
         }),
       });
 

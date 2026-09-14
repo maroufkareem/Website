@@ -13,6 +13,7 @@ const NAV_GROUPS: { label: string; links: { href: string; label: string }[] }[] 
     links: [
       { href: "/admin", label: "Dashboard" },
       { href: "/admin/enquiries", label: "Enquiries" },
+      { href: "/admin/enrollments", label: "Enrollments" },
       { href: "/admin/reservations", label: "Reservations" },
       { href: "/admin/quizzes", label: "Quizzes" },
       { href: "/admin/analytics", label: "Analytics" },

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   countNewEnquiries,
+  countNewEnrollments,
   countPageViewsSince,
   countPublishedBooks,
   countPublishedPrograms,
@@ -10,16 +11,19 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const [newEnquiries, publishedPrograms, publishedBooks, pageViews30, recentEnquiries] = await Promise.all([
-    countNewEnquiries().catch(() => 0),
-    countPublishedPrograms().catch(() => 0),
-    countPublishedBooks().catch(() => 0),
-    countPageViewsSince(30).catch(() => 0),
-    getRecentEnquiries(5).catch(() => []),
-  ]);
+  const [newEnquiries, newEnrollments, publishedPrograms, publishedBooks, pageViews30, recentEnquiries] =
+    await Promise.all([
+      countNewEnquiries().catch(() => 0),
+      countNewEnrollments().catch(() => 0),
+      countPublishedPrograms().catch(() => 0),
+      countPublishedBooks().catch(() => 0),
+      countPageViewsSince(30).catch(() => 0),
+      getRecentEnquiries(5).catch(() => []),
+    ]);
 
   const stats = [
     { label: "New Enquiries", value: newEnquiries },
+    { label: "New Enrollments", value: newEnrollments },
     { label: "Published Programs", value: publishedPrograms },
     { label: "Published Books", value: publishedBooks },
     { label: "Page Views (30d)", value: pageViews30 },
@@ -32,7 +36,7 @@ export default async function AdminDashboardPage() {
         <p className="text-sm text-neutral-400">Overview of site activity.</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-lg border border-[#C9A65A]/20 bg-[#111111] p-5">
             <p className="text-3xl font-bold text-[#C9A65A]">{stat.value}</p>
@@ -90,6 +94,12 @@ export default async function AdminDashboardPage() {
               className="rounded border border-[#C9A65A]/30 px-3 py-2 text-center text-sm font-semibold text-[#C9A65A] transition hover:bg-[#C9A65A]/10"
             >
               View Enquiries
+            </Link>
+            <Link
+              href="/admin/enrollments"
+              className="rounded border border-[#C9A65A]/30 px-3 py-2 text-center text-sm font-semibold text-[#C9A65A] transition hover:bg-[#C9A65A]/10"
+            >
+              View Enrollments
             </Link>
           </div>
         </div>

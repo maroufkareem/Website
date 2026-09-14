@@ -5,6 +5,7 @@ import {
   adminUsers,
   books,
   enquiries,
+  enrollments,
   bookReservations,
   quizzes,
   quizQuestions,
@@ -284,6 +285,74 @@ export async function countNewEnquiries(): Promise<number> {
     .select({ count: sql<number>`count(*)::int` })
     .from(enquiries)
     .where(eq(enquiries.status, "new"));
+  return rows[0]?.count ?? 0;
+}
+
+// ---------- enrollments ----------
+
+export type Enrollment = typeof enrollments.$inferSelect;
+
+export async function createEnrollment(values: {
+  studentName: string;
+  studentEmail: string;
+  studentPhone?: string;
+  school?: string;
+  country?: string;
+  programInterest?: string;
+  parentName?: string;
+  parentPhone?: string;
+  parentEmail?: string;
+  goals?: string;
+}): Promise<Enrollment> {
+  const db = getDb();
+  const [row] = await db
+    .insert(enrollments)
+    .values({
+      studentName: values.studentName,
+      studentEmail: values.studentEmail,
+      studentPhone: values.studentPhone ?? "",
+      school: values.school ?? "",
+      country: values.country ?? "",
+      programInterest: values.programInterest ?? "",
+      parentName: values.parentName ?? "",
+      parentPhone: values.parentPhone ?? "",
+      parentEmail: values.parentEmail ?? "",
+      goals: values.goals ?? "",
+      status: "new",
+    })
+    .returning();
+  return row;
+}
+
+export async function listEnrollments(): Promise<Enrollment[]> {
+  const db = getDb();
+  return db.select().from(enrollments).orderBy(desc(enrollments.createdAt));
+}
+
+export async function getRecentEnrollments(limit = 5): Promise<Enrollment[]> {
+  const db = getDb();
+  return db.select().from(enrollments).orderBy(desc(enrollments.createdAt)).limit(limit);
+}
+
+export async function updateEnrollmentStatus(
+  id: number,
+  status: "new" | "contacted" | "closed"
+): Promise<void> {
+  const db = getDb();
+  await db.update(enrollments).set({ status }).where(eq(enrollments.id, id));
+}
+
+export async function deleteEnrollment(id: number): Promise<void> {
+  const db = getDb();
+  await db.delete(enrollments).where(eq(enrollments.id, id));
+}
+
+export async function countNewEnrollments(): Promise<number> {
+  const db = getDb();
+  const rows = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(enrollments)
+    .where(eq(enrollments.status, "new"));
   return rows[0]?.count ?? 0;
 }
 

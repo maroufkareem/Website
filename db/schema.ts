@@ -172,6 +172,22 @@ export const bookReservations = pgTable("book_reservations", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const enrollments = pgTable("enrollments", {
+  id: serial("id").primaryKey(),
+  studentName: text("student_name").notNull(),
+  studentEmail: text("student_email").notNull(),
+  studentPhone: text("student_phone").notNull().default(""),
+  school: text("school").notNull().default(""),
+  country: text("country").notNull().default(""),
+  programInterest: text("program_interest").notNull().default(""),
+  parentName: text("parent_name").notNull().default(""),
+  parentPhone: text("parent_phone").notNull().default(""),
+  parentEmail: text("parent_email").notNull().default(""),
+  goals: text("goals").notNull().default(""),
+  status: text("status").notNull().default("new"), // 'new' | 'contacted' | 'closed'
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const enquiries = pgTable("enquiries", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
